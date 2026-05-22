@@ -1,0 +1,932 @@
+{
+  "cv": [
+    {
+      "site": "ecommerce",
+      "defect": "missing_element",
+      "time_s": 5.527,
+      "confidence": 0.1647544118782409,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.00043609246957698744,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.25,
+        "yolo_bbox_shift": 0.04203559027777778
+      },
+      "correct": false
+    },
+    {
+      "site": "ecommerce",
+      "defect": "wrong_color",
+      "time_s": 3.181,
+      "confidence": 0.1722261162461006,
+      "is_defect": false,
+      "signals": {
+        "ssim": 1.1713792009482304e-05,
+        "psnr": 0.03814205547411609,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.25,
+        "yolo_bbox_shift": 0.04187210648148148
+      },
+      "correct": false
+    },
+    {
+      "site": "ecommerce",
+      "defect": "broken_layout",
+      "time_s": 3.204,
+      "confidence": 0.16894081544132641,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.004411310241614785,
+        "psnr": 0.2117112687552567,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0010920621141975308
+      },
+      "correct": false
+    },
+    {
+      "site": "ecommerce",
+      "defect": "text_overflow",
+      "time_s": 3.184,
+      "confidence": 0.21561010169497066,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.004699539448021706,
+        "psnr": 0.24676864902800644,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.25,
+        "yolo_bbox_shift": 0.04223066165123457
+      },
+      "correct": false
+    },
+    {
+      "site": "ecommerce",
+      "defect": "misalignment",
+      "time_s": 3.199,
+      "confidence": 0.17072357205685434,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0040760130374477566,
+        "psnr": 0.22146385945947888,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 8.391203703703685e-05
+      },
+      "correct": false
+    },
+    {
+      "site": "ecommerce",
+      "defect": "wrong_text",
+      "time_s": 3.216,
+      "confidence": 0.18531703596579183,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.000922218219853721,
+        "psnr": 0.10186064497353609,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.25,
+        "yolo_bbox_shift": 0.042442611882716044
+      },
+      "correct": false
+    },
+    {
+      "site": "ecommerce",
+      "defect": "missing_image",
+      "time_s": 3.18,
+      "confidence": 0.2067275090768825,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0012696522567012813,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.5,
+        "yolo_bbox_shift": 0.12566261574074075
+      },
+      "correct": false
+    },
+    {
+      "site": "ecommerce",
+      "defect": "broken_interaction",
+      "time_s": 3.163,
+      "confidence": 0.1250805027775125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0002198461742861646,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 7.113233024691338e-05
+      },
+      "correct": false
+    },
+    {
+      "site": "dashboard",
+      "defect": "missing_element",
+      "time_s": 3.17,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "dashboard",
+      "defect": "wrong_color",
+      "time_s": 3.164,
+      "confidence": 0.1339148271576296,
+      "is_defect": false,
+      "signals": {
+        "ssim": 1.1669808145819971e-05,
+        "psnr": 0.04455371362389282,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "dashboard",
+      "defect": "broken_layout",
+      "time_s": 3.157,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "dashboard",
+      "defect": "text_overflow",
+      "time_s": 3.141,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "dashboard",
+      "defect": "misalignment",
+      "time_s": 3.195,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "dashboard",
+      "defect": "wrong_text",
+      "time_s": 3.218,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "dashboard",
+      "defect": "missing_image",
+      "time_s": 3.199,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "dashboard",
+      "defect": "broken_interaction",
+      "time_s": 3.196,
+      "confidence": 0.12509559622202185,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0002731320629195677,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "crm",
+      "defect": "missing_element",
+      "time_s": 3.165,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "crm",
+      "defect": "wrong_color",
+      "time_s": 3.17,
+      "confidence": 0.12500407820803816,
+      "is_defect": false,
+      "signals": {
+        "ssim": 1.1652022966157638e-05,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "crm",
+      "defect": "broken_layout",
+      "time_s": 3.16,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "crm",
+      "defect": "text_overflow",
+      "time_s": 3.162,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "crm",
+      "defect": "misalignment",
+      "time_s": 3.149,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "crm",
+      "defect": "wrong_text",
+      "time_s": 3.159,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "crm",
+      "defect": "missing_image",
+      "time_s": 3.147,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "crm",
+      "defect": "broken_interaction",
+      "time_s": 3.172,
+      "confidence": 0.12503520053683714,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.00010057296239185387,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "admin",
+      "defect": "missing_element",
+      "time_s": 3.157,
+      "confidence": 0.131365383258345,
+      "is_defect": false,
+      "signals": {
+        "ssim": 3.259855117965227e-05,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.12707947530864197
+      },
+      "correct": false
+    },
+    {
+      "site": "admin",
+      "defect": "wrong_color",
+      "time_s": 3.172,
+      "confidence": 0.14471422454377958,
+      "is_defect": false,
+      "signals": {
+        "ssim": 5.171196762465691e-05,
+        "psnr": 0.06671075794839432,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.12707947530864197
+      },
+      "correct": false
+    },
+    {
+      "site": "admin",
+      "defect": "broken_layout",
+      "time_s": 3.154,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "admin",
+      "defect": "text_overflow",
+      "time_s": 3.15,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "admin",
+      "defect": "misalignment",
+      "time_s": 3.133,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "admin",
+      "defect": "wrong_text",
+      "time_s": 3.133,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "admin",
+      "defect": "missing_image",
+      "time_s": 3.144,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "admin",
+      "defect": "broken_interaction",
+      "time_s": 3.157,
+      "confidence": 0.1314888083032701,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.00038524153667995886,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.12707947530864197
+      },
+      "correct": false
+    },
+    {
+      "site": "booking",
+      "defect": "missing_element",
+      "time_s": 3.159,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "booking",
+      "defect": "wrong_color",
+      "time_s": 3.144,
+      "confidence": 0.14124987888385268,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0015336902858068546,
+        "psnr": 0.07856543641910119,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "booking",
+      "defect": "broken_layout",
+      "time_s": 3.14,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "booking",
+      "defect": "text_overflow",
+      "time_s": 3.129,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "booking",
+      "defect": "misalignment",
+      "time_s": 3.13,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "booking",
+      "defect": "wrong_text",
+      "time_s": 3.151,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "booking",
+      "defect": "missing_image",
+      "time_s": 3.15,
+      "confidence": 0.125,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    },
+    {
+      "site": "booking",
+      "defect": "broken_interaction",
+      "time_s": 3.154,
+      "confidence": 0.12518659822978154,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0005331377993758046,
+        "psnr": 0.0,
+        "ocr_sim": 0.5,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "correct": false
+    }
+  ],
+  "pw": [
+    {
+      "site": "ecommerce",
+      "defect": "missing_element",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "ecommerce",
+      "defect": "wrong_color",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "ecommerce",
+      "defect": "broken_layout",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "ecommerce",
+      "defect": "text_overflow",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "ecommerce",
+      "defect": "misalignment",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "ecommerce",
+      "defect": "wrong_text",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "ecommerce",
+      "defect": "missing_image",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "ecommerce",
+      "defect": "broken_interaction",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "dashboard",
+      "defect": "missing_element",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "dashboard",
+      "defect": "wrong_color",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "dashboard",
+      "defect": "broken_layout",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "dashboard",
+      "defect": "text_overflow",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "dashboard",
+      "defect": "misalignment",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "dashboard",
+      "defect": "wrong_text",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "dashboard",
+      "defect": "missing_image",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "dashboard",
+      "defect": "broken_interaction",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "crm",
+      "defect": "missing_element",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "crm",
+      "defect": "wrong_color",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "crm",
+      "defect": "broken_layout",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "crm",
+      "defect": "text_overflow",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "crm",
+      "defect": "misalignment",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "crm",
+      "defect": "wrong_text",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "crm",
+      "defect": "missing_image",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "crm",
+      "defect": "broken_interaction",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "admin",
+      "defect": "missing_element",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "admin",
+      "defect": "wrong_color",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "admin",
+      "defect": "broken_layout",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "admin",
+      "defect": "text_overflow",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "admin",
+      "defect": "misalignment",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "admin",
+      "defect": "wrong_text",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "admin",
+      "defect": "missing_image",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "admin",
+      "defect": "broken_interaction",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "booking",
+      "defect": "missing_element",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "booking",
+      "defect": "wrong_color",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "booking",
+      "defect": "broken_layout",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "booking",
+      "defect": "text_overflow",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "booking",
+      "defect": "misalignment",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "booking",
+      "defect": "wrong_text",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    },
+    {
+      "site": "booking",
+      "defect": "missing_image",
+      "time_s": 0.15,
+      "passed": true,
+      "assertion_time": 0.15,
+      "correct": false
+    },
+    {
+      "site": "booking",
+      "defect": "broken_interaction",
+      "time_s": 0.15,
+      "passed": false,
+      "assertion_time": 0.15,
+      "correct": true
+    }
+  ],
+  "metrics": {
+    "cv_f1": 0.0,
+    "pw_f1": 0.5,
+    "cv_overhead": 21.49,
+    "total_scenarios": 40
+  }
+}

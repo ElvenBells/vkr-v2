@@ -1,0 +1,65 @@
+{
+  "paths": {
+    "yolo_model": "models/best.pt",
+    "dataset_root": "my_dataset_yolo",
+    "benchmarks_root": "benchmarks",
+    "ground_truth_dir": "benchmarks/ground_truth",
+    "reports_dir": "reports",
+    "screenshots_dir": "reports/screenshots"
+  },
+  "yolo": {
+    "classes": [
+      "link", "button", "input", "select", "textarea", "label", 
+      "checkbox", "radio", "dropdown", "slider", "toggle", 
+      "menu_item", "clickable", "icon", "image", "text"
+    ],
+    "conf_threshold": 0.45,
+    "iou_threshold": 0.50,
+    "imgsz": 640,
+    "device": "cpu",
+    "half_precision": false
+  },
+  "visual_oracle": {
+    "ssim_method": "structural_similarity",
+    "ssim_base_threshold": 0.85,
+    "psnr_base_threshold": 25.0,
+    "sigma_k": 2.5,
+    "baseline_samples": 50,
+    "ignore_roi_padding_pct": 5,
+    "mask_animations": true
+  },
+  "ocr": {
+    "tesseract_cmd": "E:/work_vkr/tesseract.exe",
+    "engine": "tesseract",
+    "lang": "rus+eng",
+    "config": "--psm 6 --oem 3",
+    "levenshtein_tolerance": 2,
+    "min_text_confidence": 0.6
+  },
+  "hybrid_aggregator": {
+    "weights": {
+      "ssim": 0.50,
+      "psnr": 0.25,
+      "ocr_sim": 0.15,
+      "yolo_struct_drift": 0.07,
+      "yolo_bbox_shift": 0.03
+    },
+    "calibration_method": "temperature_scaling",
+    "defect_confidence_threshold": 0.25,
+    "initial_temperature": 1.0
+  },
+  "browser": {
+    "type": "chromium",
+    "headless": true,
+    "viewport": {"width": 1920, "height": 1080},
+    "timeout_ms": 30000,
+    "slow_mo_ms": 0,
+    "args": ["--disable-gpu", "--no-sandbox", "--disable-dev-shm-usage"]
+  },
+  "experiment": {
+    "random_seed": 42,
+    "parallel_workers": 4,
+    "allure_results_dir": "reports/allure-results",
+    "log_level": "INFO"
+  }
+}

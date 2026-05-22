@@ -1,0 +1,833 @@
+{
+  "cv_results": [
+    {
+      "time_s": 7.387,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": false
+    },
+    {
+      "time_s": 5.187,
+      "confidence": 0.5044527041378782,
+      "is_defect": true,
+      "signals": {
+        "ssim": 0.4257223899843926,
+        "psnr": 1.0,
+        "ocr_sim": 0.052959501557632405,
+        "yolo_struct_drift": 0.4444444444444444,
+        "yolo_bbox_shift": 0.08454909336419753
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.162,
+      "confidence": 0.6323762984725699,
+      "is_defect": true,
+      "signals": {
+        "ssim": 0.6770100483189972,
+        "psnr": 1.0,
+        "ocr_sim": 0.21038961038961035,
+        "yolo_struct_drift": 0.16666666666666663,
+        "yolo_bbox_shift": 0.021538869598765432
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.168,
+      "confidence": 0.7041232089220788,
+      "is_defect": true,
+      "signals": {
+        "ssim": 0.8086129031094708,
+        "psnr": 1.0,
+        "ocr_sim": 0.1282051282051282,
+        "yolo_struct_drift": 0.4,
+        "yolo_bbox_shift": 0.08619960455246913
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.14,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.146,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.13,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.176,
+      "confidence": 0.5877378605189384,
+      "is_defect": true,
+      "signals": {
+        "ssim": 0.587305431693031,
+        "psnr": 1.0,
+        "ocr_sim": 0.13898305084745766,
+        "yolo_struct_drift": 0.2857142857142857,
+        "yolo_bbox_shift": 0.10792290151014108
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.163,
+      "confidence": 0.021123476132605342,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.020158559801140008,
+        "psnr": 0.0,
+        "ocr_sim": 0.07361963190184051,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 4.1714891975308706e-05
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.187,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": false
+    },
+    {
+      "time_s": 5.21,
+      "confidence": 0.6950655036850868,
+      "is_defect": true,
+      "signals": {
+        "ssim": 0.8682010308888632,
+        "psnr": 1.0,
+        "ocr_sim": 0.003984063745019917,
+        "yolo_struct_drift": 0.125,
+        "yolo_bbox_shift": 0.053912622630070545
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.261,
+      "confidence": 0.4575937112219378,
+      "is_defect": true,
+      "signals": {
+        "ssim": 0.3042133345758663,
+        "psnr": 1.0,
+        "ocr_sim": 0.2292682926829268,
+        "yolo_struct_drift": 0.2727272727272727,
+        "yolo_bbox_shift": 0.06686303135521886
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.264,
+      "confidence": 0.773409280182737,
+      "is_defect": true,
+      "signals": {
+        "ssim": 0.9571442192461549,
+        "psnr": 1.0,
+        "ocr_sim": 0.03984063745019917,
+        "yolo_struct_drift": 0.5,
+        "yolo_bbox_shift": 0.12870249807098766
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.193,
+      "confidence": 0.07920557720272374,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.2959806155519731,
+        "ocr_sim": 0.028340080971659964,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.03198037229938272
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.19,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.191,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.181,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.205,
+      "confidence": 0.007207214420595559,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.04801670146137782,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0001569733796296293
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.071,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": false
+    },
+    {
+      "time_s": 5.053,
+      "confidence": 0.4582399270151233,
+      "is_defect": true,
+      "signals": {
+        "ssim": 0.3131521072383203,
+        "psnr": 0.847818877533383,
+        "ocr_sim": 0.352112676056338,
+        "yolo_struct_drift": 0.5,
+        "yolo_bbox_shift": 0.06307508680555556
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.127,
+      "confidence": 0.4885615769373421,
+      "is_defect": true,
+      "signals": {
+        "ssim": 0.27150342329691435,
+        "psnr": 1.0,
+        "ocr_sim": 0.32061068702290074,
+        "yolo_struct_drift": 0.75,
+        "yolo_bbox_shift": 0.07394207451499117
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.101,
+      "confidence": 0.42180725845251876,
+      "is_defect": true,
+      "signals": {
+        "ssim": 0.2716035766346475,
+        "psnr": 1.0,
+        "ocr_sim": 0.11702127659574468,
+        "yolo_struct_drift": 0.25,
+        "yolo_bbox_shift": 0.03174262152777778
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.059,
+      "confidence": 0.05836197193287035,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.38888888888888884,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0009546199845679015
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.094,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.071,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.073,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.056,
+      "confidence": 0.009324348713119894,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.062146892655367214,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 7.716049382716032e-05
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.111,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": false
+    },
+    {
+      "time_s": 5.125,
+      "confidence": 0.4634305237749091,
+      "is_defect": true,
+      "signals": {
+        "ssim": 0.36710280565728837,
+        "psnr": 1.0,
+        "ocr_sim": 0.10032362459546929,
+        "yolo_struct_drift": 0.19999999999999996,
+        "yolo_bbox_shift": 0.027685908564814815
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.199,
+      "confidence": 0.5014350894250512,
+      "is_defect": true,
+      "signals": {
+        "ssim": 0.3128449368151065,
+        "psnr": 1.0,
+        "ocr_sim": 0.3587174348697395,
+        "yolo_struct_drift": 0.5555555555555556,
+        "yolo_bbox_shift": 0.07720389660493827
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.178,
+      "confidence": 0.5203869466456683,
+      "is_defect": true,
+      "signals": {
+        "ssim": 0.470493175306248,
+        "psnr": 1.0,
+        "ocr_sim": 0.09148264984227128,
+        "yolo_struct_drift": 0.30000000000000004,
+        "yolo_bbox_shift": 0.013932050540123456
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.182,
+      "confidence": 0.019387498950921404,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0021016028742287807,
+        "psnr": 0.0,
+        "ocr_sim": 0.067524115755627,
+        "yolo_struct_drift": 0.11111111111111116,
+        "yolo_bbox_shift": 0.014343412422839506
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.168,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.272,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.233,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.164,
+      "confidence": 0.01723175312003765,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.007188173834062339,
+        "psnr": 0.0,
+        "ocr_sim": 0.03614457831325302,
+        "yolo_struct_drift": 0.11111111111111116,
+        "yolo_bbox_shift": 0.01460672260802469
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.111,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": false
+    },
+    {
+      "time_s": 5.123,
+      "confidence": 0.3442953737963992,
+      "is_defect": true,
+      "signals": {
+        "ssim": 0.164253618415654,
+        "psnr": 0.9735927479376221,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.25,
+        "yolo_bbox_shift": 0.04234592013888889
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.219,
+      "confidence": 0.44051936792836216,
+      "is_defect": true,
+      "signals": {
+        "ssim": 0.24242595546012546,
+        "psnr": 0.9107260051345065,
+        "ocr_sim": 0.3366336633663367,
+        "yolo_struct_drift": 0.5555555555555556,
+        "yolo_bbox_shift": 0.07469835069444444
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.125,
+      "confidence": 0.41091526736201844,
+      "is_defect": true,
+      "signals": {
+        "ssim": 0.2799679503091429,
+        "psnr": 0.9896913855869589,
+        "ocr_sim": 0.015037593984962405,
+        "yolo_struct_drift": 0.25,
+        "yolo_bbox_shift": 0.12509355709876543
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.123,
+      "confidence": 0.1231035426427797,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.4475886066714634,
+        "ocr_sim": 0.06201550387596899,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.06346884645061729
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.143,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.142,
+      "confidence": 0.024501492948812646,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0375565694090213,
+        "psnr": 0.0,
+        "ocr_sim": 0.02564102564102566,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.06256847993827161
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.118,
+      "confidence": 9.99999999999999e-08,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 0.0
+      },
+      "expected_defect": true
+    },
+    {
+      "time_s": 5.141,
+      "confidence": 0.0010018291177959317,
+      "is_defect": false,
+      "signals": {
+        "ssim": 0.0020000268698511237,
+        "psnr": 0.0,
+        "ocr_sim": 0.0,
+        "yolo_struct_drift": 0.0,
+        "yolo_bbox_shift": 6.052276234567869e-05
+      },
+      "expected_defect": true
+    }
+  ],
+  "pw_results": [
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": false
+    },
+    {
+      "time_s": 0.12,
+      "detected": true,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": true,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": true,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": false
+    },
+    {
+      "time_s": 0.12,
+      "detected": true,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": true,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": true,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": false
+    },
+    {
+      "time_s": 0.12,
+      "detected": true,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": true,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": true,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": false
+    },
+    {
+      "time_s": 0.12,
+      "detected": true,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": true,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": true,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": false
+    },
+    {
+      "time_s": 0.12,
+      "detected": true,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": true,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": false,
+      "expected_defect": true
+    },
+    {
+      "time_s": 0.12,
+      "detected": true,
+      "expected_defect": true
+    }
+  ],
+  "cv_metrics": {
+    "precision": 1.0,
+    "recall": 0.4,
+    "f1": 0.5714,
+    "far": 0.0,
+    "accuracy": 0.4667
+  },
+  "pw_metrics": {
+    "precision": 1.0,
+    "recall": 0.375,
+    "f1": 0.5455,
+    "far": 0.0,
+    "accuracy": 0.4444
+  },
+  "optimized_cv_threshold": 0.15,
+  "cv_overhead_x": 43.36,
+  "total_scenarios": 45
+}

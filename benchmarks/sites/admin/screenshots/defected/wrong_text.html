@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthetic Admin Benchmark v1.0</title>
+    <style>
+        /* === THEME VARIABLES === */
+        :root {
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --surface-hover: #f1f5f9;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --danger: #dc2626;
+            --danger-hover: #b91c1c;
+            --success: #16a34a;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            --radius: 8px;
+            --font-sans: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --surface-hover: #334155;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --danger: #ef4444;
+            --danger-hover: #dc2626;
+            --success: #22c55e;
+            --border: #334155;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+        }
+
+        /* === RESET & LAYOUT === */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.5; display: flex; min-height: 100vh; transition: background 0.3s, color 0.3s; }
+
+        /* === SIDEBAR === */
+        .sidebar { width: 240px; background: var(--surface); border-right: 1px solid var(--border); padding: 1.5rem 0; display: flex; flex-direction: column; }
+        .sidebar-logo { padding: 0 1.5rem 1.5rem; font-size: 1.25rem; font-weight: 700; color: var(--primary); border-bottom: 1px solid var(--border); margin-bottom: 1rem; }
+        .nav-list { list-style: none; }
+        .nav-item { display: flex; align-items: center; padding: 0.75rem 1.5rem; color: var(--text-muted); text-decoration: none; transition: all 0.2s; cursor: pointer; }
+        .nav-item:hover { background: var(--surface-hover); color: var(--text); }
+        .nav-item.active { background: var(--surface-hover); color: var(--primary); border-right: 3px solid var(--primary); font-weight: 600; }
+        .nav-icon { margin-right: 0.75rem; width: 20px; text-align: center; }
+
+        /* === MAIN CONTENT === */
+        .main { flex: 1; padding: 2rem; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+        .header h1 { font-size: 1.5rem; font-weight: 700; }
+        .header-actions { display: flex; gap: 0.75rem; align-items: center; }
+        
+        /* Theme Toggle */
+        .theme-toggle { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 0.5rem 0.8rem; border-radius: var(--radius); cursor: pointer; display: flex; align-items: center; gap: 0.5rem; }
+        .theme-toggle:hover { background: var(--surface-hover); }
+
+        /* === CRUD TABLE === */
+        .toolbar { display: flex; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem; }
+        .btn { padding: 0.5rem 1rem; border: none; border-radius: var(--radius); cursor: pointer; font-weight: 500; transition: all 0.2s; }
+        .btn-primary { background: var(--primary); color: #fff; }
+        .btn-primary:hover { background: var(--primary-hover); }
+        .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text); }
+        .btn-ghost:hover { background: var(--surface-hover); }
+        .btn-danger { background: var(--danger); color: #fff; }
+        .btn-danger:hover { background: var(--danger-hover); }
+
+        .table-container { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; }
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table th, .data-table td { padding: 0.9rem 1.2rem; text-align: left; border-bottom: 1px solid var(--border); }
+        .data-table th { background: var(--surface-hover); color: var(--text-muted); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .data-table tbody tr:hover { background: var(--surface-hover); }
+        .status-badge { padding: 0.25rem 0.6rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+        .status-active { background: rgba(22, 163, 74, 0.1); color: var(--success); }
+        .status-inactive { background: rgba(100, 116, 139, 0.1); color: var(--text-muted); }
+        .status-blocked { background: rgba(220, 38, 38, 0.1); color: var(--danger); }
+
+        /* Actions & Tooltips */
+        .action-cell { display: flex; gap: 0.5rem; }
+        .action-btn { position: relative; background: none; border: none; cursor: pointer; color: var(--text-muted); padding: 0.3rem; border-radius: 4px; transition: background 0.2s; }
+        .action-btn:hover { background: var(--surface-hover); color: var(--text); }
+        .action-btn[data-tooltip]::after {
+            content: attr(data-tooltip);
+            position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%);
+            background: var(--text); color: var(--bg); padding: 0.3rem 0.6rem;
+            border-radius: 4px; font-size: 0.75rem; white-space: nowrap;
+            opacity: 0; pointer-events: none; transition: opacity 0.2s;
+        }
+        .action-btn:hover[data-tooltip]::after { opacity: 1; }
+
+        /* === DYNAMIC ZONES === */
+        .footer-status { margin-top: 1.5rem; color: var(--text-muted); font-size: 0.85rem; text-align: center; }
+        .footer-status span { font-variant-numeric: tabular-nums; }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar" data-testid="sidebar-nav">
+        <div class="sidebar-logo">AdminPanel</div>
+        <ul class="nav-list">
+            <li class="nav-item active" data-route="dashboard" data-testid="nav-dashboard">
+                <span class="nav-icon">📊</span> Dashboard
+            </li>
+            <li class="nav-item" data-route="users" data-testid="nav-users">
+                <span class="nav-icon">👥</span> Users
+            </li>
+            <li class="nav-item" data-route="settings" data-testid="nav-settings">
+                <span class="nav-icon">⚙️</span> Settings
+            </li>
+            <li class="nav-item" data-route="reports" data-testid="nav-reports">
+                <span class="nav-icon">📄</span> Reports
+            </li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+        <header class="header">
+            <h1>User Management</h1>
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle" data-testid="theme-toggle">
+                    🌓 Toggle Theme
+                </button>
+                <span class="live-timer" id="sync-timer" data-testid="sync-timer" data-dynamic="true">Sync: --:--:--</span>
+            </div>
+        </header>
+
+        <section class="crud-section">
+            <div class="toolbar">
+                <input type="text" id="search-input" class="search-input" placeholder="Search users..." data-testid="search-input" style="padding:0.5rem; border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); color:var(--text); width:250px;">
+                <button class="btn btn-primary" id="add-user-btn" data-testid="add-user-btn">+ Add User</button>
+            </div>
+            
+            <div class="table-container" data-testid="table-wrapper">
+                <table class="data-table" id="user-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- Rendered via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="footer-status" id="footer-status" data-testid="footer-status" data-dynamic="true">
+            Total Users: <span id="total-count">0</span> | Last Updated: <span id="last-updated">Never</span>
+        </div>
+    </main>
+
+    <script>
+    // Benchmark defect injection functions
+    window.benchmark = {
+        mutateDOM: () => {
+            // Удаляем/добавляем элементы
+            const card = document.querySelector('.card, article, .kpi-card');
+            if (card) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'dom-mutation-wrapper';
+                card.parentNode.insertBefore(wrapper, card);
+                wrapper.appendChild(card);
+            }
+        },
+        
+        mutateCSS: () => {
+            // Меняем цвета
+            document.documentElement.style.setProperty('--primary', '#ff0000');
+            document.body.style.filter = 'hue-rotate(90deg)';
+        },
+        
+        mutateText: () => {
+            // Меняем текст
+            const h1 = document.querySelector('h1, h2, h3, .title');
+            if (h1) h1.innerText = 'CHANGED: ' + h1.innerText.substring(0, 20);
+        },
+        
+        mutateSemantic: () => {
+            // Меняем классы
+            const badge = document.querySelector('.badge, .status, [class*="badge"]');
+            if (badge) {
+                badge.className = badge.className.replace('primary', 'secondary');
+                badge.className = badge.className.replace('success', 'danger');
+            }
+        },
+        
+        mutateContrast: () => {
+            // Снижаем контраст
+            document.body.style.filter = 'contrast(0.6) brightness(1.2)';
+        },
+        
+        mutateValidation: () => {
+            // Добавляем ошибки валидации
+            const input = document.querySelector('input');
+            if (input) {
+                input.style.borderColor = 'red';
+                const error = document.createElement('div');
+                error.className = 'validation-error';
+                error.innerText = 'Invalid input';
+                error.style.color = 'red';
+                error.style.fontSize = '12px';
+                input.parentNode.appendChild(error);
+            }
+        },
+        
+        mutateThemeVars: () => {
+            // Меняем CSS переменные
+            document.documentElement.style.setProperty('--bg-color', '#1a1a2e');
+            document.documentElement.style.setProperty('--text-color', '#eee');
+            document.body.style.backgroundColor = '#1a1a2e';
+            document.body.style.color = '#eee';
+        },
+        
+        mutateTooltips: () => {
+            // Меняем tooltips
+            const btn = document.querySelector('button, [title]');
+            if (btn) {
+                btn.setAttribute('title', 'CHANGED TOOLTIP');
+                btn.setAttribute('data-tooltip', 'Modified');
+            }
+        },
+        
+        mutateState: () => {
+            // Меняем состояние элементов
+            const btn = document.querySelector('button');
+            if (btn) {
+                btn.disabled = !btn.disabled;
+                btn.style.opacity = btn.disabled ? '0.5' : '1';
+            }
+        },
+        
+        mutateAnimation: () => {
+            // Отключаем анимации
+            const style = document.createElement('style');
+            style.innerText = '* { animation: none !important; transition: none !important; }';
+            document.head.appendChild(style);
+        },
+        
+        mutateOCR: () => {
+            // Меняем текст для OCR
+            const price = document.querySelector('[class*="price"], .cost, .amount');
+            if (price) price.innerText = '999999 ₽';
+        }
+    };
+    </script>
+</body>
+</html>

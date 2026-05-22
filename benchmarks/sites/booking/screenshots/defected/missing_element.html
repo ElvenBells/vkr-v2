@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthetic Booking Benchmark v1.0</title>
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --success: #16a34a;
+            --error: #dc2626;
+            --border: #e2e8f0;
+            --radius: 10px;
+            --shadow: 0 4px 12px -2px rgba(0,0,0,0.08);
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; min-height: 100vh; display: flex; flex-direction: column; }
+
+        /* HEADER */
+        .header { padding: 1.2rem 2rem; background: var(--surface); border-bottom: 1px solid var(--border); text-align: center; }
+        .header h1 { font-size: 1.4rem; font-weight: 700; }
+
+        /* STEPPER */
+        .stepper-container { max-width: 800px; margin: 2rem auto; flex: 1; padding: 0 1rem; }
+        .stepper-nav { display: flex; justify-content: space-between; margin-bottom: 2rem; position: relative; }
+        .stepper-nav::before { content: ''; position: absolute; top: 18px; left: 40px; right: 40px; height: 2px; background: var(--border); z-index: 0; }
+        .step-item { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; background: var(--bg); padding: 0 0.5rem; cursor: default; }
+        .step-circle { width: 36px; height: 36px; border-radius: 50%; background: var(--surface); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-weight: 600; transition: var(--transition); }
+        .step-item.active .step-circle { border-color: var(--primary); color: var(--primary); background: #eff6ff; }
+        .step-item.completed .step-circle { border-color: var(--success); background: var(--success); color: #fff; }
+        .step-label { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; }
+        .step-item.active .step-label { color: var(--text); font-weight: 500; }
+
+        /* STEP CONTENT */
+        .step-content { animation: fadeSlideIn 0.4s ease; }
+        .card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 1.5rem; }
+        
+        /* CALENDAR */
+        .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .calendar-nav { background: none; border: 1px solid var(--border); border-radius: 6px; padding: 0.4rem 0.7rem; cursor: pointer; }
+        .calendar-nav:hover { background: #f1f5f9; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; text-align: center; }
+        .cal-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 6px; cursor: pointer; font-size: 0.9rem; transition: var(--transition); }
+        .cal-day:hover:not(.empty):not(.disabled) { background: #eff6ff; }
+        .cal-day.selected { background: var(--primary); color: #fff; }
+        .cal-day.today { border: 2px solid var(--primary); }
+        .cal-day.disabled { color: var(--text-muted); cursor: default; opacity: 0.5; }
+        .cal-day.empty { cursor: default; }
+        .weekday { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; padding: 0.4rem 0; }
+
+        /* FORM */
+        .form-group { margin-bottom: 1rem; }
+        .form-label { display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 0.4rem; }
+        .form-input { width: 100%; padding: 0.7rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; transition: var(--transition); }
+        .form-input:focus { outline: 2px solid var(--primary); border-color: transparent; }
+        .form-input:read-only { background: #f8fafc; cursor: not-allowed; }
+        .form-input:disabled { opacity: 0.6; background: #e2e8f0; cursor: not-allowed; }
+        .form-hint { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; min-height: 1.2em; }
+
+        /* BUTTONS */
+        .actions { display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem; }
+        .btn { padding: 0.7rem 1.2rem; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; transition: var(--transition); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-primary { background: var(--primary); color: #fff; }
+        .btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
+        .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text); }
+
+        /* MESSAGES & OCR PREVIEW */
+        .message-box { padding: 1rem; border-radius: 8px; margin-top: 1rem; display: none; align-items: center; gap: 0.8rem; }
+        .message-box.show { display: flex; animation: pulseIn 0.3s ease; }
+        .msg-success { background: #ecfdf5; color: var(--success); border-left: 4px solid var(--success); }
+        .msg-error { background: #fef2f2; color: var(--error); border-left: 4px solid var(--error); }
+        .ocr-preview { background: #f1f5f9; padding: 0.8rem; border-radius: 6px; font-family: monospace; margin-top: 1rem; min-height: 40px; }
+        .ocr-preview span { font-weight: 600; }
+
+        /* FOOTER */
+        .footer-status { text-align: center; padding: 1.2rem; color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem; }
+        .footer-status span { font-variant-numeric: tabular-nums; }
+
+        /* ANIMATIONS */
+        @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseIn { 0% { transform: scale(0.98); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+        @media (max-width: 600px) {
+            .stepper-label { display: none; }
+            .calendar-grid { font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header" id="header" data-testid="header-panel">
+        <h1>Hotel Booking System</h1>
+    </header>
+
+    <main class="stepper-container" id="main-container" data-testid="stepper-wrapper">
+        <!-- STEPPER NAV -->
+        <nav class="stepper-nav" id="stepper-nav" data-testid="stepper-navigation">
+            <div class="step-item active" data-step="1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Dates</div>
+            </div>
+            <div class="step-item" data-step="2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Details</div>
+            </div>
+            <div class="step-item" data-step="3">
+                <div class="step-circle">3</div>
+                <div class="step-label">Confirm</div>
+            </div>
+        </nav>
+
+        <!-- STEP 1: CALENDAR -->
+        <section class="step-content" id="step-1" data-testid="step-calendar">
+            <div class="card">
+                <div class="calendar-header">
+                    <!-- BUTTON REMOVED --><span class="calendar-nav" id="prev-month" aria-label="Previous month">◀</button>
+                    <h2 id="current-month-title">October 2023</h2>
+                    <!-- BUTTON REMOVED --><span class="calendar-nav" id="next-month" aria-label="Next month">▶</button>
+                </div>
+                <div class="calendar-grid" id="calendar-grid" data-testid="calendar-grid">
+                    <!-- Rendered via JS -->
+                </div>
+                <div class="form-hint" id="date-selection-hint">Please select check-in and check-out dates.</div>
+            </div>
+            <div class="actions">
+                <!-- BUTTON REMOVED --><span class="btn btn-primary" id="btn-next-1" data-testid="btn-step1-next" disabled>Next Step</button>
+            </div>
+        </section>
+
+        <!-- STEP 2: FORM -->
+        <section class="step-content" id="step-2" data-testid="step-form" hidden>
+            <div class="card">
+                <div class="form-group">
+                    <label class="form-label" for="inp-name">Full Name *</label>
+                    <!-- INPUT REMOVED --><span type="text" id="inp-name" class="form-input" required data-testid="input-name" placeholder="John Doe">
+                    <div class="form-hint" id="err-name"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="inp-email">Email *</label>
+                    <!-- INPUT REMOVED --><span type="email" id="inp-email" class="form-input" required data-testid="input-email" placeholder="john@example.com">
+                    <div class="form-hint" id="err-email"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="inp-guests">Number of Guests</label>
+                    <!-- INPUT REMOVED --><span type="number" id="inp-guests" class="form-input" min="1" max="10" value="1" readonly data-testid="input-guests-readonly">
+                    <div class="form-hint">Currently locked by system (demo mode)</div>
+                </div>
+                <!-- Real-time OCR Preview -->
+                <div class="ocr-preview" id="ocr-preview" data-testid="ocr-live-preview">
+                    OCR Preview: <span id="preview-text">Waiting for input...</span>
+                </div>
+            </div>
+            <div class="actions">
+                <!-- BUTTON REMOVED --><span class="btn btn-ghost" id="btn-back-2" data-testid="btn-step2-back">Back</button>
+                <!-- BUTTON REMOVED --><span class="btn btn-primary" id="btn-next-2" data-testid="btn-step2-next" disabled>Review Booking</button>
+            </div>
+        </section>
+
+        <!-- STEP 3: CONFIRM & MESSAGES -->
+        <section class="step-content" id="step-3" data-testid="step-confirm" hidden>
+            <div class="card">
+                <h2>Booking Summary</h2>
+                <p id="summary-text" style="margin-top:0.5rem; color:var(--text-muted);">Dates and details will appear here.</p>
+                <div class="message-box" id="msg-box" data-testid="status-message">
+                    <span id="msg-icon">✓</span>
+                    <span id="msg-text">Booking confirmed successfully.</span>
+                </div>
+            </div>
+            <div class="actions">
+                <!-- BUTTON REMOVED --><span class="btn btn-ghost" id="btn-back-3" data-testid="btn-step3-back">Back</button>
+                <!-- BUTTON REMOVED --><span class="btn btn-primary" id="btn-confirm" data-testid="btn-confirm-booking" disabled>Confirm & Pay</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-status" id="footer-status" data-testid="footer-status" data-dynamic="true">
+        Session ID: <span id="session-id">BK-9842</span> | Expires in: <span id="timer">14:59</span>
+    </footer>
+
+    <script>
+    // Benchmark defect injection functions
+    window.benchmark = {
+        mutateDOM: () => {
+            // Удаляем/добавляем элементы
+            const card = document.querySelector('.card, article, .kpi-card');
+            if (card) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'dom-mutation-wrapper';
+                card.parentNode.insertBefore(wrapper, card);
+                wrapper.appendChild(card);
+            }
+        },
+        
+        mutateCSS: () => {
+            // Меняем цвета
+            document.documentElement.style.setProperty('--primary', '#ff0000');
+            document.body.style.filter = 'hue-rotate(90deg)';
+        },
+        
+        mutateText: () => {
+            // Меняем текст
+            const h1 = document.querySelector('h1, h2, h3, .title');
+            if (h1) h1.innerText = 'CHANGED: ' + h1.innerText.substring(0, 20);
+        },
+        
+        mutateSemantic: () => {
+            // Меняем классы
+            const badge = document.querySelector('.badge, .status, [class*="badge"]');
+            if (badge) {
+                badge.className = badge.className.replace('primary', 'secondary');
+                badge.className = badge.className.replace('success', 'danger');
+            }
+        },
+        
+        mutateContrast: () => {
+            // Снижаем контраст
+            document.body.style.filter = 'contrast(0.6) brightness(1.2)';
+        },
+        
+        mutateValidation: () => {
+            // Добавляем ошибки валидации
+            const input = document.querySelector('input');
+            if (input) {
+                input.style.borderColor = 'red';
+                const error = document.createElement('div');
+                error.className = 'validation-error';
+                error.innerText = 'Invalid input';
+                error.style.color = 'red';
+                error.style.fontSize = '12px';
+                input.parentNode.appendChild(error);
+            }
+        },
+        
+        mutateThemeVars: () => {
+            // Меняем CSS переменные
+            document.documentElement.style.setProperty('--bg-color', '#1a1a2e');
+            document.documentElement.style.setProperty('--text-color', '#eee');
+            document.body.style.backgroundColor = '#1a1a2e';
+            document.body.style.color = '#eee';
+        },
+        
+        mutateTooltips: () => {
+            // Меняем tooltips
+            const btn = document.querySelector('button, [title]');
+            if (btn) {
+                btn.setAttribute('title', 'CHANGED TOOLTIP');
+                btn.setAttribute('data-tooltip', 'Modified');
+            }
+        },
+        
+        mutateState: () => {
+            // Меняем состояние элементов
+            const btn = document.querySelector('button');
+            if (btn) {
+                btn.disabled = !btn.disabled;
+                btn.style.opacity = btn.disabled ? '0.5' : '1';
+            }
+        },
+        
+        mutateAnimation: () => {
+            // Отключаем анимации
+            const style = document.createElement('style');
+            style.innerText = '* { animation: none !important; transition: none !important; }';
+            document.head.appendChild(style);
+        },
+        
+        mutateOCR: () => {
+            // Меняем текст для OCR
+            const price = document.querySelector('[class*="price"], .cost, .amount');
+            if (price) price.innerText = '999999 ₽';
+        }
+    };
+    </script>
+</body>
+</html>

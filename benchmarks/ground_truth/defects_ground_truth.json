@@ -1,0 +1,532 @@
+{
+  "ecommerce": [
+    {
+      "site": "ecommerce",
+      "defect_type": "missing_element",
+      "ref_screenshot": "benchmarks\\sites\\ecommerce\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\ecommerce\\screenshots\\defected\\missing_element.png",
+      "expected_severity": "high",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "ecommerce",
+      "defect_type": "wrong_color",
+      "ref_screenshot": "benchmarks\\sites\\ecommerce\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\ecommerce\\screenshots\\defected\\wrong_color.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "ecommerce",
+      "defect_type": "broken_layout",
+      "ref_screenshot": "benchmarks\\sites\\ecommerce\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\ecommerce\\screenshots\\defected\\broken_layout.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "ecommerce",
+      "defect_type": "text_overflow",
+      "ref_screenshot": "benchmarks\\sites\\ecommerce\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\ecommerce\\screenshots\\defected\\text_overflow.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "ecommerce",
+      "defect_type": "misalignment",
+      "ref_screenshot": "benchmarks\\sites\\ecommerce\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\ecommerce\\screenshots\\defected\\misalignment.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "ecommerce",
+      "defect_type": "wrong_text",
+      "ref_screenshot": "benchmarks\\sites\\ecommerce\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\ecommerce\\screenshots\\defected\\wrong_text.png",
+      "expected_severity": "high",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "ecommerce",
+      "defect_type": "missing_image",
+      "ref_screenshot": "benchmarks\\sites\\ecommerce\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\ecommerce\\screenshots\\defected\\missing_image.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "ecommerce",
+      "defect_type": "broken_interaction",
+      "ref_screenshot": "benchmarks\\sites\\ecommerce\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\ecommerce\\screenshots\\defected\\broken_interaction.png",
+      "expected_severity": "high",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    }
+  ],
+  "dashboard": [
+    {
+      "site": "dashboard",
+      "defect_type": "missing_element",
+      "ref_screenshot": "benchmarks\\sites\\dashboard\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\dashboard\\screenshots\\defected\\missing_element.png",
+      "expected_severity": "high",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "dashboard",
+      "defect_type": "wrong_color",
+      "ref_screenshot": "benchmarks\\sites\\dashboard\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\dashboard\\screenshots\\defected\\wrong_color.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "dashboard",
+      "defect_type": "broken_layout",
+      "ref_screenshot": "benchmarks\\sites\\dashboard\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\dashboard\\screenshots\\defected\\broken_layout.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "dashboard",
+      "defect_type": "text_overflow",
+      "ref_screenshot": "benchmarks\\sites\\dashboard\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\dashboard\\screenshots\\defected\\text_overflow.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "dashboard",
+      "defect_type": "misalignment",
+      "ref_screenshot": "benchmarks\\sites\\dashboard\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\dashboard\\screenshots\\defected\\misalignment.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "dashboard",
+      "defect_type": "wrong_text",
+      "ref_screenshot": "benchmarks\\sites\\dashboard\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\dashboard\\screenshots\\defected\\wrong_text.png",
+      "expected_severity": "high",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "dashboard",
+      "defect_type": "missing_image",
+      "ref_screenshot": "benchmarks\\sites\\dashboard\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\dashboard\\screenshots\\defected\\missing_image.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "dashboard",
+      "defect_type": "broken_interaction",
+      "ref_screenshot": "benchmarks\\sites\\dashboard\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\dashboard\\screenshots\\defected\\broken_interaction.png",
+      "expected_severity": "high",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    }
+  ],
+  "crm": [
+    {
+      "site": "crm",
+      "defect_type": "missing_element",
+      "ref_screenshot": "benchmarks\\sites\\crm\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\crm\\screenshots\\defected\\missing_element.png",
+      "expected_severity": "high",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "crm",
+      "defect_type": "wrong_color",
+      "ref_screenshot": "benchmarks\\sites\\crm\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\crm\\screenshots\\defected\\wrong_color.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "crm",
+      "defect_type": "broken_layout",
+      "ref_screenshot": "benchmarks\\sites\\crm\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\crm\\screenshots\\defected\\broken_layout.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "crm",
+      "defect_type": "text_overflow",
+      "ref_screenshot": "benchmarks\\sites\\crm\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\crm\\screenshots\\defected\\text_overflow.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "crm",
+      "defect_type": "misalignment",
+      "ref_screenshot": "benchmarks\\sites\\crm\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\crm\\screenshots\\defected\\misalignment.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "crm",
+      "defect_type": "wrong_text",
+      "ref_screenshot": "benchmarks\\sites\\crm\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\crm\\screenshots\\defected\\wrong_text.png",
+      "expected_severity": "high",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "crm",
+      "defect_type": "missing_image",
+      "ref_screenshot": "benchmarks\\sites\\crm\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\crm\\screenshots\\defected\\missing_image.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "crm",
+      "defect_type": "broken_interaction",
+      "ref_screenshot": "benchmarks\\sites\\crm\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\crm\\screenshots\\defected\\broken_interaction.png",
+      "expected_severity": "high",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    }
+  ],
+  "admin": [
+    {
+      "site": "admin",
+      "defect_type": "missing_element",
+      "ref_screenshot": "benchmarks\\sites\\admin\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\admin\\screenshots\\defected\\missing_element.png",
+      "expected_severity": "high",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "admin",
+      "defect_type": "wrong_color",
+      "ref_screenshot": "benchmarks\\sites\\admin\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\admin\\screenshots\\defected\\wrong_color.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "admin",
+      "defect_type": "broken_layout",
+      "ref_screenshot": "benchmarks\\sites\\admin\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\admin\\screenshots\\defected\\broken_layout.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "admin",
+      "defect_type": "text_overflow",
+      "ref_screenshot": "benchmarks\\sites\\admin\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\admin\\screenshots\\defected\\text_overflow.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "admin",
+      "defect_type": "misalignment",
+      "ref_screenshot": "benchmarks\\sites\\admin\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\admin\\screenshots\\defected\\misalignment.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "admin",
+      "defect_type": "wrong_text",
+      "ref_screenshot": "benchmarks\\sites\\admin\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\admin\\screenshots\\defected\\wrong_text.png",
+      "expected_severity": "high",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "admin",
+      "defect_type": "missing_image",
+      "ref_screenshot": "benchmarks\\sites\\admin\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\admin\\screenshots\\defected\\missing_image.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "admin",
+      "defect_type": "broken_interaction",
+      "ref_screenshot": "benchmarks\\sites\\admin\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\admin\\screenshots\\defected\\broken_interaction.png",
+      "expected_severity": "high",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    }
+  ],
+  "booking": [
+    {
+      "site": "booking",
+      "defect_type": "missing_element",
+      "ref_screenshot": "benchmarks\\sites\\booking\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\booking\\screenshots\\defected\\missing_element.png",
+      "expected_severity": "high",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "booking",
+      "defect_type": "wrong_color",
+      "ref_screenshot": "benchmarks\\sites\\booking\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\booking\\screenshots\\defected\\wrong_color.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "booking",
+      "defect_type": "broken_layout",
+      "ref_screenshot": "benchmarks\\sites\\booking\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\booking\\screenshots\\defected\\broken_layout.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "booking",
+      "defect_type": "text_overflow",
+      "ref_screenshot": "benchmarks\\sites\\booking\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\booking\\screenshots\\defected\\text_overflow.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "booking",
+      "defect_type": "misalignment",
+      "ref_screenshot": "benchmarks\\sites\\booking\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\booking\\screenshots\\defected\\misalignment.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "booking",
+      "defect_type": "wrong_text",
+      "ref_screenshot": "benchmarks\\sites\\booking\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\booking\\screenshots\\defected\\wrong_text.png",
+      "expected_severity": "high",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "booking",
+      "defect_type": "missing_image",
+      "ref_screenshot": "benchmarks\\sites\\booking\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\booking\\screenshots\\defected\\missing_image.png",
+      "expected_severity": "medium",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    },
+    {
+      "site": "booking",
+      "defect_type": "broken_interaction",
+      "ref_screenshot": "benchmarks\\sites\\booking\\screenshots\\reference\\baseline.png",
+      "test_screenshot": "benchmarks\\sites\\booking\\screenshots\\defected\\broken_interaction.png",
+      "expected_severity": "high",
+      "gt_bbox": {
+        "x1": 100,
+        "y1": 100,
+        "x2": 1800,
+        "y2": 900
+      }
+    }
+  ]
+}

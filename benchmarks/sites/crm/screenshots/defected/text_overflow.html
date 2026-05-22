@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[TRUNCATED] Synthetic CRM Benchmark v1.0</title>
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --radius: 8px;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            --font-mono: 'Segoe UI Mono', 'Consolas', monospace;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; padding-bottom: 4rem; }
+
+        /* HEADER */
+        .header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding: 1rem 2rem; background: var(--surface); border-bottom: 1px solid var(--border); }
+        .header h1 { font-size: 1.3rem; font-weight: 700; }
+        .controls { display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; }
+        .search-input { padding: 0.6rem 0.9rem; border: 1px solid var(--border); border-radius: 6px; width: 260px; font-size: 0.9rem; }
+        .search-input:focus { outline: 2px solid var(--primary); border-color: transparent; }
+        .btn { padding: 0.6rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; font-size: 0.9rem; transition: background 0.2s; }
+        .btn-primary { background: var(--primary); color: #fff; }
+        .btn-primary:hover { background: var(--primary-hover); }
+        .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text); }
+        .btn-ghost:hover { background: #f1f5f9; }
+
+        /* TABLE */
+        .table-container { max-width: 1100px; margin: 1.5rem auto; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; border: 1px solid var(--border); }
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table th, .data-table td { padding: 0.9rem 1.2rem; text-align: left; border-bottom: 1px solid var(--border); }
+        .data-table th { background: #f8fafc; font-weight: 600; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .data-table tbody tr:hover { background: #f1f5f9; cursor: pointer; }
+        .contact-info { display: flex; align-items: center; gap: 0.8rem; }
+        .avatar { width: 36px; height: 36px; border-radius: 50%; background: #cbd5e1; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #475569; }
+        .name { font-weight: 600; }
+        .email { font-size: 0.85rem; color: var(--text-muted); }
+        
+        /* BADGES */
+        .badge { padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; display: inline-block; }
+        .badge-active { background: #ecfdf5; color: var(--success); }
+        .badge-lead { background: #fef3c7; color: var(--warning); }
+        .badge-inactive { background: #f1f5f9; color: var(--text-muted); }
+        .badge-archived { background: #fee2e2; color: var(--danger); }
+
+        /* MODAL */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(15,23,42,0.6); display: none; align-items: center; justify-content: center; z-index: 100; opacity: 0; transition: opacity 0.2s; }
+        .modal-overlay.open { display: flex; opacity: 1; }
+        .modal-card { background: var(--surface); padding: 1.5rem; border-radius: var(--radius); width: 100%; max-width: 480px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); transform: translateY(10px); transition: transform 0.2s; }
+        .modal-overlay.open .modal-card { transform: translateY(0); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; }
+        .modal-header h2 { font-size: 1.1rem; }
+        .close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); }
+        .form-group { margin-bottom: 1rem; }
+        .form-label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.4rem; }
+        .form-input { width: 100%; padding: 0.6rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; }
+        .form-input.error { border-color: var(--danger); background: #fef2f2; }
+        .error-msg { color: var(--danger); font-size: 0.8rem; margin-top: 0.3rem; min-height: 1.2em; }
+        .modal-actions { display: flex; justify-content: flex-end; gap: 0.6rem; margin-top: 1.5rem; }
+
+        /* DYNAMIC FOOTER */
+        .status-bar { text-align: center; padding: 1.2rem; color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem; }
+        .status-bar span { font-variant-numeric: tabular-nums; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header { flex-direction: column; align-items: flex-start; }
+            .search-input { width: 100%; }
+            .data-table th:nth-child(3), .data-table td:nth-child(3) { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header" id="header" data-testid="header-panel">
+        <h1 style="width:80px;overflow:hidden;white-space:nowrap;">Contact Management</h1>
+        <div class="controls">
+            <input type="text" id="search-input" class="search-input" placeholder="Поиск по имени или email..." data-testid="search-input">
+            <button id="add-contact-btn" class="btn btn-primary" data-testid="add-contact-btn">+ Добавить контакт</button>
+        </div>
+    </header>
+
+    <main class="table-container" id="table-container" data-testid="contact-table-container">
+        <table class="data-table" id="contact-table">
+            <thead>
+                <tr>
+                    <th>Контакт</th>
+                    <th>Роль</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody id="contact-tbody">
+                <!-- Rendered via JS -->
+            </tbody>
+        </table>
+    </main>
+
+    <div class="status-bar" id="status-bar" data-testid="status-bar" data-dynamic="true">
+        Показано: <span id="visible-count">0</span> | Обновлено: <span id="last-sync">--:--</span>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="contact-modal" data-testid="contact-modal">
+        <div class="modal-card" role="dialog" aria-modal="true">
+            <div class="modal-header">
+                <h2 id="modal-title">Редактирование контакта</h2>
+                <button class="close-btn" id="modal-close" aria-label="Закрыть">&times;</button>
+            </div>
+            <form id="contact-form" novalidate>
+                <div class="form-group">
+                    <label class="form-label" for="form-name">Имя *</label>
+                    <input type="text" id="form-name" class="form-input" required data-testid="form-name">
+                    <div class="error-msg" id="err-name" data-testid="err-name"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="form-email">Email *</label>
+                    <input type="email" id="form-email" class="form-input" required data-testid="form-email">
+                    <div class="error-msg" id="err-email" data-testid="err-email"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="form-role">Роль</label>
+                    <input type="text" id="form-role" class="form-input" data-testid="form-role">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="form-status">Статус</label>
+                    <select id="form-status" class="form-input" data-testid="form-status">
+                        <option value="active">Active</option>
+                        <option value="lead">Lead</option>
+                        <option value="inactive">Inactive</option>
+                        <option value="archived">Archived</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost" id="modal-cancel">Отмена</button>
+                    <button type="submit" class="btn btn-primary" id="modal-save">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+    // Benchmark defect injection functions
+    window.benchmark = {
+        mutateDOM: () => {
+            // Удаляем/добавляем элементы
+            const card = document.querySelector('.card, article, .kpi-card');
+            if (card) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'dom-mutation-wrapper';
+                card.parentNode.insertBefore(wrapper, card);
+                wrapper.appendChild(card);
+            }
+        },
+        
+        mutateCSS: () => {
+            // Меняем цвета
+            document.documentElement.style.setProperty('--primary', '#ff0000');
+            document.body.style.filter = 'hue-rotate(90deg)';
+        },
+        
+        mutateText: () => {
+            // Меняем текст
+            const h1 = document.querySelector('h1, h2, h3, .title');
+            if (h1) h1.innerText = 'CHANGED: ' + h1.innerText.substring(0, 20);
+        },
+        
+        mutateSemantic: () => {
+            // Меняем классы
+            const badge = document.querySelector('.badge, .status, [class*="badge"]');
+            if (badge) {
+                badge.className = badge.className.replace('primary', 'secondary');
+                badge.className = badge.className.replace('success', 'danger');
+            }
+        },
+        
+        mutateContrast: () => {
+            // Снижаем контраст
+            document.body.style.filter = 'contrast(0.6) brightness(1.2)';
+        },
+        
+        mutateValidation: () => {
+            // Добавляем ошибки валидации
+            const input = document.querySelector('input');
+            if (input) {
+                input.style.borderColor = 'red';
+                const error = document.createElement('div');
+                error.className = 'validation-error';
+                error.innerText = 'Invalid input';
+                error.style.color = 'red';
+                error.style.fontSize = '12px';
+                input.parentNode.appendChild(error);
+            }
+        },
+        
+        mutateThemeVars: () => {
+            // Меняем CSS переменные
+            document.documentElement.style.setProperty('--bg-color', '#1a1a2e');
+            document.documentElement.style.setProperty('--text-color', '#eee');
+            document.body.style.backgroundColor = '#1a1a2e';
+            document.body.style.color = '#eee';
+        },
+        
+        mutateTooltips: () => {
+            // Меняем tooltips
+            const btn = document.querySelector('button, [title]');
+            if (btn) {
+                btn.setAttribute('title', 'CHANGED TOOLTIP');
+                btn.setAttribute('data-tooltip', 'Modified');
+            }
+        },
+        
+        mutateState: () => {
+            // Меняем состояние элементов
+            const btn = document.querySelector('button');
+            if (btn) {
+                btn.disabled = !btn.disabled;
+                btn.style.opacity = btn.disabled ? '0.5' : '1';
+            }
+        },
+        
+        mutateAnimation: () => {
+            // Отключаем анимации
+            const style = document.createElement('style');
+            style.innerText = '* { animation: none !important; transition: none !important; }';
+            document.head.appendChild(style);
+        },
+        
+        mutateOCR: () => {
+            // Меняем текст для OCR
+            const price = document.querySelector('[class*="price"], .cost, .amount');
+            if (price) price.innerText = '999999 ₽';
+        }
+    };
+    </script>
+</body>
+</html>

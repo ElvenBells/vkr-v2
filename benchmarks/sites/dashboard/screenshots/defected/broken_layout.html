@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthetic Dashboard Benchmark v1.0</title>
+    <style>
+        :root {
+            --bg: #f1f5f9;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --primary: #3b82f6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --border: #e2e8f0;
+            --radius: 10px;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; padding-bottom: 3rem; }
+        
+        /* HEADER */
+        .header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; padding: 1rem 2rem; background: var(--card-bg); border-bottom: 1px solid var(--border); gap: 1rem; }
+        .header h1 { font-size: 1.4rem; font-weight: 700; }
+        .header-controls { display: flex; gap: 0.75rem; align-items: center; }
+        .dropdown, .btn { padding: 0.5rem 0.8rem; border: 1px solid var(--border); border-radius: 6px; background: #fff; cursor: pointer; font-size: 0.9rem; }
+        .btn:hover { background: #f8fafc; }
+        .live-clock { font-variant-numeric: tabular-nums; color: var(--text-muted); font-size: 0.85rem; }
+        .live-clock[data-dynamic="true"] { /* Mark for SSIM masking */ }
+
+        /* LAYOUT */
+        .container { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
+        
+        /* KPI CARDS */
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-bottom: 1.5rem; }
+        .kpi-card { background: var(--card-bg); padding: 1.2rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); }
+        .kpi-title { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+        .kpi-value { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.3rem; }
+        .kpi-trend { font-size: 0.85rem; font-weight: 600; padding: 0.15rem 0.4rem; border-radius: 4px; }
+        .trend-up { color: var(--success); background: #ecfdf5; }
+        .trend-down { color: var(--danger); background: #fef2f2; }
+
+        /* CHART */
+        .chart-section { background: var(--card-bg); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); margin-bottom: 1.5rem; }
+        .chart-section h2 { font-size: 1.1rem; margin-bottom: 1rem; }
+        .chart-wrapper { position: relative; width: 100%; height: 280px; }
+        svg.chart { width: 100%; height: 100%; }
+        .chart-grid line { stroke: var(--border); stroke-width: 1; }
+        .chart-axis text { fill: var(--text-muted); font-size: 0.8rem; }
+        .chart-line { fill: none; stroke: var(--primary); stroke-width: 2.5; stroke-linecap: round; }
+        .chart-point { fill: var(--primary); stroke: #fff; stroke-width: 2; }
+        .chart-tooltip { position: absolute; top: 10px; right: 10px; background: rgba(15,23,42,0.85); color: #fff; padding: 0.4rem 0.7rem; border-radius: 6px; font-size: 0.8rem; pointer-events: none; opacity: 0; transition: opacity 0.2s; }
+        .chart-tooltip.active { opacity: 1; }
+
+        /* TABLE */
+        .table-section { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; }
+        .table-header { padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); font-weight: 600; }
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table th, .data-table td { padding: 0.8rem 1.2rem; text-align: left; border-bottom: 1px solid var(--border); }
+        .data-table th { background: #f8fafc; cursor: pointer; user-select: none; font-weight: 600; color: var(--text-muted); }
+        .data-table th:hover { color: var(--primary); }
+        .data-table tbody tr:hover { background: #f1f5f9; }
+        .status-badge { padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.75rem; font-weight: 500; text-transform: uppercase; }
+        .st-active { background: #ecfdf5; color: var(--success); }
+        .st-pending { background: #fef3c7; color: var(--warning); }
+        .st-closed { background: #f1f5f9; color: var(--text-muted); }
+
+        /* ASYNC LAYOUT SHIFT SIMULATOR */
+        .async-banner { height: 0; overflow: hidden; transition: height 0.4s ease, opacity 0.4s; opacity: 0; background: #fffbeb; border-left: 4px solid var(--warning); margin-top: 1rem; }
+        .async-banner.visible { height: auto; min-height: 48px; padding: 0.8rem; opacity: 1; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header { flex-direction: column; align-items: flex-start; }
+            .header-controls { width: 100%; justify-content: space-between; }
+            .data-table { font-size: 0.9rem; }
+            .data-table th, .data-table td { padding: 0.6rem; }
+        }
+    </style>
+</head>
+<body style="transform:rotate(1.5deg) scale(0.98);">
+
+    <header class="header" id="header" data-testid="header-panel">
+        <h1>Analytics Overview</h1>
+        <div class="header-controls">
+            <select id="period-filter" class="dropdown" data-testid="period-select">
+                <option value="7d">Last 7 Days</option>
+                <option value="30d" selected>Last 30 Days</option>
+                <option value="90d">Last 90 Days</option>
+            </select>
+            <button id="refresh-btn" class="btn" data-testid="refresh-btn">⟳ Refresh Data</button>
+        </div>
+        <div class="live-clock" id="live-clock" data-testid="clock" data-dynamic="true">--:--:--</div>
+    </header>
+
+    <main class="container">
+        <!-- KPI CARDS -->
+        <section class="kpi-grid" id="kpi-section" data-testid="kpi-grid">
+            <article class="kpi-card" data-testid="kpi-card-revenue">
+                <div class="kpi-title">Total Revenue</div>
+                <div class="kpi-value" id="val-revenue">₽1,245,000</div>
+                <span class="kpi-trend trend-up" id="trend-revenue">▲ 12.5%</span>
+            </article>
+            <article class="kpi-card" data-testid="kpi-card-users">
+                <div class="kpi-title">Active Users</div>
+                <div class="kpi-value" id="val-users">8,432</div>
+                <span class="kpi-trend trend-up" id="trend-users">▲ 8.1%</span>
+            </article>
+            <article class="kpi-card" data-testid="kpi-card-conversion">
+                <div class="kpi-title">Conversion Rate</div>
+                <div class="kpi-value" id="val-conversion">3.4%</div>
+                <span class="kpi-trend trend-down" id="trend-conversion">▼ 0.4%</span>
+            </article>
+            <article class="kpi-card" data-testid="kpi-card-sessions">
+                <div class="kpi-title">Avg. Session</div>
+                <div class="kpi-value" id="val-sessions">4m 12s</div>
+                <span class="kpi-trend trend-up" id="trend-sessions">▲ 1.8%</span>
+            </article>
+        </section>
+
+        <!-- CHART -->
+        <section class="chart-section" id="chart-section" data-testid="chart-container">
+            <h2>Traffic & Conversion Trend</h2>
+            <div class="chart-wrapper">
+                <svg class="chart" id="main-chart" viewBox="0 0 800 280">
+                    <!-- Grid -->
+                    <g class="chart-grid">
+                        <line x1="40" y1="40" x2="760" y2="40"/>
+                        <line x1="40" y1="100" x2="760" y2="100"/>
+                        <line x1="40" y1="160" x2="760" y2="160"/>
+                        <line x1="40" y1="220" x2="760" y2="220"/>
+                    </g>
+                    <!-- Axes -->
+                    <g class="chart-axis">
+                        <text x="30" y="45">10k</text><text x="30" y="105">7k</text>
+                        <text x="30" y="165">4k</text><text x="30" y="225">1k</text>
+                        <text x="100" y="265">Jan</text><text x="220" y="265">Feb</text>
+                        <text x="340" y="265">Mar</text><text x="460" y="265">Apr</text>
+                        <text x="580" y="265">May</text><text x="700" y="265">Jun</text>
+                    </g>
+                    <!-- Data Line -->
+                    <path id="chart-path" class="chart-line" d="M100,180 L220,140 L340,160 L460,90 L580,110 L700,60"/>
+                    <!-- Points -->
+                    <g id="chart-points">
+                        <circle cx="100" cy="180" r="4" class="chart-point"/>
+                        <circle cx="220" cy="140" r="4" class="chart-point"/>
+                        <circle cx="340" cy="160" r="4" class="chart-point"/>
+                        <circle cx="460" cy="90" r="4" class="chart-point"/>
+                        <circle cx="580" cy="110" r="4" class="chart-point"/>
+                        <circle cx="700" cy="60" r="4" class="chart-point"/>
+                    </g>
+                </svg>
+                <div class="chart-tooltip" id="chart-tooltip" data-dynamic="true">Hover over points</div>
+            </div>
+        </section>
+
+        <!-- TABLE -->
+        <section class="table-section" id="table-section" data-testid="table-container">
+            <div class="table-header">Recent Transactions</div>
+            <table class="data-table" id="data-table">
+                <thead>
+                    <tr>
+                        <th data-sort="date" id="th-date">Date ↕</th>
+                        <th data-sort="product" id="th-product">Product ↕</th>
+                        <th data-sort="sales" id="th-sales">Sales (₽) ↕</th>
+                        <th data-sort="status" id="th-status">Status ↕</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Rendered via JS -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- LAYOUT SHIFT SIMULATOR -->
+        <div class="async-banner" id="async-banner" data-testid="async-banner" data-dynamic="true">
+            ⚠️ <strong>System Update:</strong> Maintenance scheduled for 02:00–04:00 UTC. Expect temporary latency spikes.
+        </div>
+    </main>
+
+    <script>
+    // Benchmark defect injection functions
+    window.benchmark = {
+        mutateDOM: () => {
+            // Удаляем/добавляем элементы
+            const card = document.querySelector('.card, article, .kpi-card');
+            if (card) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'dom-mutation-wrapper';
+                card.parentNode.insertBefore(wrapper, card);
+                wrapper.appendChild(card);
+            }
+        },
+        
+        mutateCSS: () => {
+            // Меняем цвета
+            document.documentElement.style.setProperty('--primary', '#ff0000');
+            document.body.style.filter = 'hue-rotate(90deg)';
+        },
+        
+        mutateText: () => {
+            // Меняем текст
+            const h1 = document.querySelector('h1, h2, h3, .title');
+            if (h1) h1.innerText = 'CHANGED: ' + h1.innerText.substring(0, 20);
+        },
+        
+        mutateSemantic: () => {
+            // Меняем классы
+            const badge = document.querySelector('.badge, .status, [class*="badge"]');
+            if (badge) {
+                badge.className = badge.className.replace('primary', 'secondary');
+                badge.className = badge.className.replace('success', 'danger');
+            }
+        },
+        
+        mutateContrast: () => {
+            // Снижаем контраст
+            document.body.style.filter = 'contrast(0.6) brightness(1.2)';
+        },
+        
+        mutateValidation: () => {
+            // Добавляем ошибки валидации
+            const input = document.querySelector('input');
+            if (input) {
+                input.style.borderColor = 'red';
+                const error = document.createElement('div');
+                error.className = 'validation-error';
+                error.innerText = 'Invalid input';
+                error.style.color = 'red';
+                error.style.fontSize = '12px';
+                input.parentNode.appendChild(error);
+            }
+        },
+        
+        mutateThemeVars: () => {
+            // Меняем CSS переменные
+            document.documentElement.style.setProperty('--bg-color', '#1a1a2e');
+            document.documentElement.style.setProperty('--text-color', '#eee');
+            document.body.style.backgroundColor = '#1a1a2e';
+            document.body.style.color = '#eee';
+        },
+        
+        mutateTooltips: () => {
+            // Меняем tooltips
+            const btn = document.querySelector('button, [title]');
+            if (btn) {
+                btn.setAttribute('title', 'CHANGED TOOLTIP');
+                btn.setAttribute('data-tooltip', 'Modified');
+            }
+        },
+        
+        mutateState: () => {
+            // Меняем состояние элементов
+            const btn = document.querySelector('button');
+            if (btn) {
+                btn.disabled = !btn.disabled;
+                btn.style.opacity = btn.disabled ? '0.5' : '1';
+            }
+        },
+        
+        mutateAnimation: () => {
+            // Отключаем анимации
+            const style = document.createElement('style');
+            style.innerText = '* { animation: none !important; transition: none !important; }';
+            document.head.appendChild(style);
+        },
+        
+        mutateOCR: () => {
+            // Меняем текст для OCR
+            const price = document.querySelector('[class*="price"], .cost, .amount');
+            if (price) price.innerText = '999999 ₽';
+        }
+    };
+    </script>
+</body>
+</html>
