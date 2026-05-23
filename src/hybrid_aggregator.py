@@ -70,9 +70,18 @@ class HybridAggregator:
         ref_yolo: Optional[StructuralFeatures] = None
     ) -> AggregationResult:
         # Нелинейная нормализация: UI-дефекты усиливаются, фоновый шум гасится
-        s_ssim = min(1.0, max(0.0, (1.0 - oracle.ssim_score) * 15.0))  # SSIM 0.95 → 0.75
-        s_psnr = min(1.0, max(0.0, (35.0 - oracle.psnr_score) / 8.0))  # PSNR < 30dB → резкий рост
-        s_ocr = max(0.0, min(1.0, 1.0 - (ocr.similarity_score or 0.95)))
+# 1. Сверхчувствительность к изменению текста (wrong_text)
+        # Если текст изменился хотя бы на 0.5% (одна опечатка на страницу), бьем тревогу на максимум
+        sim = ocr.similarity_score if ocr.similarity_score is not None else 1.0
+        s_ocr = 0.0 if sim >= 0.995 else min(1.0, (1.0 - sim) * 50.0)
+        
+        # 2. Сверхчувствительность к локальным цветам (wrong_color)
+        # Меняем множитель на 100. Теперь даже падение SSIM до 0.990 (одна кнопка) даст мощный сигнал
+        s_ssim = min(1.0, max(0.0, (1.0 - oracle.ssim_score) * 100.0))
+        
+        # 3. PSNR острее реагирует на жесткие цветовые пятна (пиксельные артефакты)
+        # Если PSNR упал ниже 32, сигнал резко растет
+        s_psnr = min(1.0, max(0.0, (35.0 - oracle.psnr_score) / 3.0))
         
         s_struct, s_bbox = self._compute_yolo_deviation(yolo, ref_yolo)
 
@@ -130,17 +139,24 @@ class HybridAggregator:
             union = np.maximum(cur_vec, ref_vec).sum()
             struct_drift = 1.0 - (intersection / union if union > 0 else 1.0)
 
-        # 2. BBox shift: разница в coverage ratio + пространственное распределение
+        # 2. BBox shift: разница в coverage ratio + разница в количестве объектов
         cov_shift = abs(current.bbox_coverage_ratio - reference.bbox_coverage_ratio)
         
-        # Сравнение распределения по квадрантам (используем все 4 квадранта)
-        quad_keys = ["TL", "TR", "BL", "BR"]
-        cur_quads = np.array([current.spatial_distribution.get(q, 0) for q in quad_keys], dtype=float)
-        ref_quads = np.array([reference.spatial_distribution.get(q, 0) for q in quad_keys], dtype=float)
+        # Штраф за изменение общего количества элементов (исчезновение/появление кнопок)
+        count_diff = abs(current.total_objects - reference.total_objects)
+        max_objs = max(current.total_objects, reference.total_objects, 1)
+        count_penalty = count_diff / max_objs
         
-        total_cur = current.total_objects if current.total_objects > 0 else 1
-        quad_diff = np.abs(cur_quads - ref_quads).sum() / total_cur
-        bbox_shift = 0.5 * cov_shift + 0.5 * min(1.0, quad_diff / 4.0)
+        # Сравнение распределения по более частой сетке (динамические бакеты по Y - отлавливает съезды)
+        cur_y = np.array([d.center()[1] for d in current.detections])
+        ref_y = np.array([d.center()[1] for d in reference.detections])
+        
+        y_shift = 0.0
+        if len(cur_y) > 0 and len(ref_y) > 0:
+            # Сравниваем медианное смещение элементов по вертикали (типичный сломанный layout)
+            y_shift = min(1.0, abs(np.median(cur_y) - np.median(ref_y)) / 500.0) # 500px нормализация
+            
+        bbox_shift = 0.4 * cov_shift + 0.4 * count_penalty + 0.2 * y_shift
 
         return min(1.0, struct_drift), min(1.0, bbox_shift)
 
