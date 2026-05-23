@@ -38,14 +38,14 @@
   },
   "hybrid_aggregator": {
     "weights": {
-      "ssim": 0.50,
-      "psnr": 0.25,
-      "ocr_sim": 0.15,
-      "yolo_struct_drift": 0.07,
-      "yolo_bbox_shift": 0.03
+      "ssim": 0.25,
+      "psnr": 0.10,
+      "ocr_sim": 0.25,
+      "yolo_struct_drift": 0.20,
+      "yolo_bbox_shift": 0.20
     },
     "calibration_method": "temperature_scaling",
-    "defect_confidence_threshold": 0.25,
+    "defect_confidence_threshold": 0.14,
     "initial_temperature": 1.0
   },
   "browser": {
