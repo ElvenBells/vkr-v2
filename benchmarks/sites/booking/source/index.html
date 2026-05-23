@@ -22,11 +22,9 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; min-height: 100vh; display: flex; flex-direction: column; }
 
-        /* HEADER */
         .header { padding: 1.2rem 2rem; background: var(--surface); border-bottom: 1px solid var(--border); text-align: center; }
         .header h1 { font-size: 1.4rem; font-weight: 700; }
 
-        /* STEPPER */
         .stepper-container { max-width: 800px; margin: 2rem auto; flex: 1; padding: 0 1rem; }
         .stepper-nav { display: flex; justify-content: space-between; margin-bottom: 2rem; position: relative; }
         .stepper-nav::before { content: ''; position: absolute; top: 18px; left: 40px; right: 40px; height: 2px; background: var(--border); z-index: 0; }
@@ -37,11 +35,9 @@
         .step-label { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; }
         .step-item.active .step-label { color: var(--text); font-weight: 500; }
 
-        /* STEP CONTENT */
         .step-content { animation: fadeSlideIn 0.4s ease; }
         .card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 1.5rem; }
         
-        /* CALENDAR */
         .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
         .calendar-nav { background: none; border: 1px solid var(--border); border-radius: 6px; padding: 0.4rem 0.7rem; cursor: pointer; }
         .calendar-nav:hover { background: #f1f5f9; }
@@ -54,16 +50,12 @@
         .cal-day.empty { cursor: default; }
         .weekday { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; padding: 0.4rem 0; }
 
-        /* FORM */
         .form-group { margin-bottom: 1rem; }
         .form-label { display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 0.4rem; }
         .form-input { width: 100%; padding: 0.7rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; transition: var(--transition); }
         .form-input:focus { outline: 2px solid var(--primary); border-color: transparent; }
-        .form-input:read-only { background: #f8fafc; cursor: not-allowed; }
-        .form-input:disabled { opacity: 0.6; background: #e2e8f0; cursor: not-allowed; }
         .form-hint { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; min-height: 1.2em; }
 
-        /* BUTTONS */
         .actions { display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem; }
         .btn { padding: 0.7rem 1.2rem; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; transition: var(--transition); }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -71,26 +63,16 @@
         .btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
         .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text); }
 
-        /* MESSAGES & OCR PREVIEW */
         .message-box { padding: 1rem; border-radius: 8px; margin-top: 1rem; display: none; align-items: center; gap: 0.8rem; }
         .message-box.show { display: flex; animation: pulseIn 0.3s ease; }
         .msg-success { background: #ecfdf5; color: var(--success); border-left: 4px solid var(--success); }
-        .msg-error { background: #fef2f2; color: var(--error); border-left: 4px solid var(--error); }
         .ocr-preview { background: #f1f5f9; padding: 0.8rem; border-radius: 6px; font-family: monospace; margin-top: 1rem; min-height: 40px; }
         .ocr-preview span { font-weight: 600; }
 
-        /* FOOTER */
         .footer-status { text-align: center; padding: 1.2rem; color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem; }
-        .footer-status span { font-variant-numeric: tabular-nums; }
-
-        /* ANIMATIONS */
+        
         @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulseIn { 0% { transform: scale(0.98); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-
-        @media (max-width: 600px) {
-            .stepper-label { display: none; }
-            .calendar-grid { font-size: 0.85rem; }
-        }
     </style>
 </head>
 <body>
@@ -100,7 +82,6 @@
     </header>
 
     <main class="stepper-container" id="main-container" data-testid="stepper-wrapper">
-        <!-- STEPPER NAV -->
         <nav class="stepper-nav" id="stepper-nav" data-testid="stepper-navigation">
             <div class="step-item active" data-step="1">
                 <div class="step-circle">1</div>
@@ -116,7 +97,6 @@
             </div>
         </nav>
 
-        <!-- STEP 1: CALENDAR -->
         <section class="step-content" id="step-1" data-testid="step-calendar">
             <div class="card">
                 <div class="calendar-header">
@@ -125,17 +105,15 @@
                     <button class="calendar-nav" id="next-month" aria-label="Next month">▶</button>
                 </div>
                 <div class="calendar-grid" id="calendar-grid" data-testid="calendar-grid">
-                    <!-- Rendered via JS -->
-                </div>
-                <div class="form-hint" id="date-selection-hint">Please select check-in and check-out dates.</div>
+                    </div>
+                <div class="form-hint" id="date-selection-hint">Пожалуйста, укажите даты заезда и выезда на календаре.</div>
             </div>
             <div class="actions">
                 <button class="btn btn-primary" id="btn-next-1" data-testid="btn-step1-next" disabled>Next Step</button>
             </div>
         </section>
 
-        <!-- STEP 2: FORM -->
-        <section class="step-content" id="step-2" data-testid="step-form" hidden>
+        <section class="step-content" id="step-2" data-testid="step-form" style="display:none;" hidden>
             <div class="card">
                 <div class="form-group">
                     <label class="form-label" for="inp-name">Full Name *</label>
@@ -150,11 +128,10 @@
                 <div class="form-group">
                     <label class="form-label" for="inp-guests">Number of Guests</label>
                     <input type="number" id="inp-guests" class="form-input" min="1" max="10" value="1" readonly data-testid="input-guests-readonly">
-                    <div class="form-hint">Currently locked by system (demo mode)</div>
+                    <div class="form-hint">Режим демонстрации: заблокировано системой</div>
                 </div>
-                <!-- Real-time OCR Preview -->
                 <div class="ocr-preview" id="ocr-preview" data-testid="ocr-live-preview">
-                    OCR Preview: <span id="preview-text">Waiting for input...</span>
+                    OCR Live: <span id="preview-text">Ожидание ввода данных...</span>
                 </div>
             </div>
             <div class="actions">
@@ -163,14 +140,13 @@
             </div>
         </section>
 
-        <!-- STEP 3: CONFIRM & MESSAGES -->
-        <section class="step-content" id="step-3" data-testid="step-confirm" hidden>
+        <section class="step-content" id="step-3" data-testid="step-confirm" style="display:none;" hidden>
             <div class="card">
                 <h2>Booking Summary</h2>
-                <p id="summary-text" style="margin-top:0.5rem; color:var(--text-muted);">Dates and details will appear here.</p>
-                <div class="message-box" id="msg-box" data-testid="status-message">
+                <div id="summary-text" style="margin-top:0.5rem; color:var(--text-muted); line-height: 1.7;">Выбранные даты отобразятся здесь после заполнения шагов.</div>
+                <div class="message-box msg-success" id="msg-box" data-testid="status-message">
                     <span id="msg-icon">✓</span>
-                    <span id="msg-text">Booking confirmed successfully.</span>
+                    <span id="msg-text">Готово.</span>
                 </div>
             </div>
             <div class="actions">
@@ -185,11 +161,164 @@
     </footer>
 
     <script>
-    // Benchmark defect injection functions
+    document.addEventListener('DOMContentLoaded', () => {
+        const grid = document.getElementById('calendar-grid');
+        const hint = document.getElementById('date-selection-hint');
+        const btnNext1 = document.getElementById('btn-next-1');
+        
+        let checkIn = null;
+        let checkOut = null;
+        
+        // Рендеринг календаря (Октябрь 2023 г. начинается с воскресенья)
+        function initCalendar() {
+            if (!grid) return;
+            grid.innerHTML = '';
+            
+            const weekdays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+            weekdays.forEach(w => {
+                const el = document.createElement('div');
+                el.className = 'weekday';
+                el.innerText = w;
+                grid.appendChild(el);
+            });
+
+            // 1 октября 2023 - воскресенье, сдвиг на 6 пустых ячеек (Пн-Сб)
+            for (let i = 0; i < 6; i++) {
+                const empty = document.createElement('div');
+                empty.className = 'cal-day empty';
+                grid.appendChild(empty);
+            }
+
+            // 31 день октября
+            for (let day = 1; day <= 31; day++) {
+                const dayEl = document.createElement('div');
+                dayEl.className = 'cal-day';
+                dayEl.innerText = day;
+                dayEl.setAttribute('data-day', day);
+                
+                if (day === 15) dayEl.classList.add('today'); // Маркер "сегодня"
+                if (day < 15) dayEl.classList.add('disabled'); // Прошлые даты заблокированы
+
+                dayEl.addEventListener('click', () => {
+                    if (dayEl.classList.contains('disabled')) return;
+                    
+                    if (!checkIn || (checkIn && checkOut)) {
+                        checkIn = day;
+                        checkOut = null;
+                        hint.innerText = `Выбрана дата заезда: ${day} октября. Укажите дату выезда.`;
+                        btnNext1.disabled = true;
+                    } else if (day > checkIn) {
+                        checkOut = day;
+                        hint.innerText = `Период: с ${checkIn} по ${checkOut} октября 2023 года.`;
+                        btnNext1.disabled = false;
+                    } else {
+                        checkIn = day;
+                        checkOut = null;
+                        hint.innerText = `Выбрана дата заезда: ${day} октября. Укажите дату выезда.`;
+                        btnNext1.disabled = true;
+                    }
+                    renderSelectionState();
+                });
+                grid.appendChild(dayEl);
+            }
+        }
+
+        function renderSelectionState() {
+            document.querySelectorAll('.cal-day:not(.empty)').forEach(el => {
+                const d = parseInt(el.getAttribute('data-day'));
+                el.classList.remove('selected');
+                el.style.background = '';
+                
+                if (d === checkIn || d === checkOut) {
+                    el.classList.add('selected');
+                }
+                if (checkIn && checkOut && d > checkIn && d < checkOut) {
+                    el.style.background = '#eff6ff'; // Подсветка диапазона
+                }
+            });
+        }
+
+        initCalendar();
+
+        // Логика перехода между шагами (Мастер переключения)
+        const step1 = document.getElementById('step-1');
+        const step2 = document.getElementById('step-2');
+        const step3 = document.getElementById('step-3');
+        const navItems = document.querySelectorAll('.step-item');
+
+        function switchStep(targetIndex) {
+            const list = [step1, step2, step3];
+            list.forEach((s, idx) => {
+                if (idx === targetIndex) {
+                    s.removeAttribute('hidden');
+                    s.style.display = 'block';
+                } else {
+                    s.setAttribute('hidden', 'true');
+                    s.style.display = 'none';
+                }
+            });
+
+            navItems.forEach((nav, idx) => {
+                nav.classList.remove('active', 'completed');
+                if (idx === targetIndex) nav.classList.add('active');
+                else if (idx < targetIndex) nav.classList.add('completed');
+            });
+
+            // Наполнение превью сводки на Шаге 3
+            if (targetIndex === 2) {
+                const name = document.getElementById('inp-name').value;
+                const email = document.getElementById('inp-email').value;
+                document.getElementById('summary-text').innerHTML = `
+                    🎰 <strong>Отель:</strong> Synthetic Grand Resort <br>
+                    📅 <strong>Даты проживания:</strong> ${checkIn} - ${checkOut} октября 2023 г.<br>
+                    👤 <strong>Клиент:</strong> ${name} (${email})<br>
+                    👥 <strong>Количество гостей:</strong> 1 человек
+                `;
+                document.getElementById('btn-confirm').disabled = false;
+            }
+        }
+
+        document.getElementById('btn-next-1').addEventListener('click', () => switchStep(1));
+        document.getElementById('btn-back-2').addEventListener('click', () => switchStep(0));
+        document.getElementById('btn-next-2').addEventListener('click', () => switchStep(2));
+        document.getElementById('btn-back-3').addEventListener('click', () => switchStep(1));
+
+        // Валидация полей Шага 2 и вывод OCR-превью
+        const inpName = document.getElementById('inp-name');
+        const inpEmail = document.getElementById('inp-email');
+        const btnNext2 = document.getElementById('btn-next-2');
+        const ocrText = document.getElementById('preview-text');
+
+        function validateForm() {
+            const n = inpName.value.trim();
+            const e = inpEmail.value.trim();
+            
+            ocrText.innerText = `Имя: ${n || '...'} | Email: ${e || '...'}`;
+            
+            const valid = (n.length >= 2) && (e.includes('@') && e.length > 5);
+            btnNext2.disabled = !valid;
+        }
+
+        inpName.addEventListener('input', validateForm);
+        inpEmail.addEventListener('input', validateForm);
+
+        // Финал - Клик по кнопке "Оплатить"
+        const btnConfirm = document.getElementById('btn-confirm');
+        const msgBox = document.getElementById('msg-box');
+        btnConfirm.addEventListener('click', () => {
+            msgBox.style.display = 'flex';
+            msgBox.classList.add('show');
+            document.getElementById('msg-text').innerText = 'Успешно! Бронирование подтверждено, чек отправлен.';
+            btnConfirm.disabled = true;
+            document.getElementById('timer').innerText = 'EXPIRED';
+        });
+    });
+    </script>
+
+    <script>
     window.benchmark = {
         mutateDOM: () => {
-            // Удаляем/добавляем элементы
-            const card = document.querySelector('.card, article, .kpi-card');
+            const card = document.querySelector('.card');
             if (card) {
                 const wrapper = document.createElement('div');
                 wrapper.className = 'dom-mutation-wrapper';
@@ -197,35 +326,22 @@
                 wrapper.appendChild(card);
             }
         },
-        
         mutateCSS: () => {
-            // Меняем цвета
             document.documentElement.style.setProperty('--primary', '#ff0000');
             document.body.style.filter = 'hue-rotate(90deg)';
         },
-        
         mutateText: () => {
-            // Меняем текст
-            const h1 = document.querySelector('h1, h2, h3, .title');
+            const h1 = document.querySelector('h1');
             if (h1) h1.innerText = 'CHANGED: ' + h1.innerText.substring(0, 20);
         },
-        
         mutateSemantic: () => {
-            // Меняем классы
-            const badge = document.querySelector('.badge, .status, [class*="badge"]');
-            if (badge) {
-                badge.className = badge.className.replace('primary', 'secondary');
-                badge.className = badge.className.replace('success', 'danger');
-            }
+            const badge = document.querySelector('.msg-success');
+            if (badge) badge.className = 'message-box msg-error';
         },
-        
         mutateContrast: () => {
-            // Снижаем контраст
             document.body.style.filter = 'contrast(0.6) brightness(1.2)';
         },
-        
         mutateValidation: () => {
-            // Добавляем ошибки валидации
             const input = document.querySelector('input');
             if (input) {
                 input.style.borderColor = 'red';
@@ -233,48 +349,30 @@
                 error.className = 'validation-error';
                 error.innerText = 'Invalid input';
                 error.style.color = 'red';
-                error.style.fontSize = '12px';
                 input.parentNode.appendChild(error);
             }
         },
-        
         mutateThemeVars: () => {
-            // Меняем CSS переменные
-            document.documentElement.style.setProperty('--bg-color', '#1a1a2e');
-            document.documentElement.style.setProperty('--text-color', '#eee');
+            document.documentElement.style.setProperty('--bg', '#1a1a2e');
             document.body.style.backgroundColor = '#1a1a2e';
             document.body.style.color = '#eee';
         },
-        
         mutateTooltips: () => {
-            // Меняем tooltips
-            const btn = document.querySelector('button, [title]');
-            if (btn) {
-                btn.setAttribute('title', 'CHANGED TOOLTIP');
-                btn.setAttribute('data-tooltip', 'Modified');
-            }
-        },
-        
-        mutateState: () => {
-            // Меняем состояние элементов
             const btn = document.querySelector('button');
-            if (btn) {
-                btn.disabled = !btn.disabled;
-                btn.style.opacity = btn.disabled ? '0.5' : '1';
-            }
+            if (btn) btn.setAttribute('title', 'CHANGED TOOLTIP');
         },
-        
+        mutateState: () => {
+            const btn = document.querySelector('button');
+            if (btn) btn.disabled = true;
+        },
         mutateAnimation: () => {
-            // Отключаем анимации
             const style = document.createElement('style');
             style.innerText = '* { animation: none !important; transition: none !important; }';
             document.head.appendChild(style);
         },
-        
         mutateOCR: () => {
-            // Меняем текст для OCR
-            const price = document.querySelector('[class*="price"], .cost, .amount');
-            if (price) price.innerText = '999999 ₽';
+            const price = document.querySelector('.footer-status');
+            if (price) price.innerText = 'Session 999999 ₽';
         }
     };
     </script>

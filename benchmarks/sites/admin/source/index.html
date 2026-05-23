@@ -67,8 +67,6 @@
         .btn-primary:hover { background: var(--primary-hover); }
         .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text); }
         .btn-ghost:hover { background: var(--surface-hover); }
-        .btn-danger { background: var(--danger); color: #fff; }
-        .btn-danger:hover { background: var(--danger-hover); }
 
         .table-container { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; }
         .data-table { width: 100%; border-collapse: collapse; }
@@ -80,18 +78,9 @@
         .status-inactive { background: rgba(100, 116, 139, 0.1); color: var(--text-muted); }
         .status-blocked { background: rgba(220, 38, 38, 0.1); color: var(--danger); }
 
-        /* Actions & Tooltips */
         .action-cell { display: flex; gap: 0.5rem; }
         .action-btn { position: relative; background: none; border: none; cursor: pointer; color: var(--text-muted); padding: 0.3rem; border-radius: 4px; transition: background 0.2s; }
         .action-btn:hover { background: var(--surface-hover); color: var(--text); }
-        .action-btn[data-tooltip]::after {
-            content: attr(data-tooltip);
-            position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%);
-            background: var(--text); color: var(--bg); padding: 0.3rem 0.6rem;
-            border-radius: 4px; font-size: 0.75rem; white-space: nowrap;
-            opacity: 0; pointer-events: none; transition: opacity 0.2s;
-        }
-        .action-btn:hover[data-tooltip]::after { opacity: 1; }
 
         /* === DYNAMIC ZONES === */
         .footer-status { margin-top: 1.5rem; color: var(--text-muted); font-size: 0.85rem; text-align: center; }
@@ -100,26 +89,18 @@
 </head>
 <body>
 
-    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar" data-testid="sidebar-nav">
         <div class="sidebar-logo">AdminPanel</div>
         <ul class="nav-list">
-            <li class="nav-item active" data-route="dashboard" data-testid="nav-dashboard">
-                <span class="nav-icon">📊</span> Dashboard
-            </li>
-            <li class="nav-item" data-route="users" data-testid="nav-users">
+            <li class="nav-item active" data-route="users" data-testid="nav-users">
                 <span class="nav-icon">👥</span> Users
             </li>
             <li class="nav-item" data-route="settings" data-testid="nav-settings">
                 <span class="nav-icon">⚙️</span> Settings
             </li>
-            <li class="nav-item" data-route="reports" data-testid="nav-reports">
-                <span class="nav-icon">📄</span> Reports
-            </li>
         </ul>
     </aside>
 
-    <!-- MAIN CONTENT -->
     <main class="main">
         <header class="header">
             <h1>User Management</h1>
@@ -149,8 +130,7 @@
                         </tr>
                     </thead>
                     <tbody id="table-body">
-                        <!-- Rendered via JS -->
-                    </tbody>
+                        </tbody>
                 </table>
             </div>
         </section>
@@ -161,97 +141,101 @@
     </main>
 
     <script>
-    // Benchmark defect injection functions
-    window.benchmark = {
-        mutateDOM: () => {
-            // Удаляем/добавляем элементы
-            const card = document.querySelector('.card, article, .kpi-card');
-            if (card) {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'dom-mutation-wrapper';
-                card.parentNode.insertBefore(wrapper, card);
-                wrapper.appendChild(card);
-            }
-        },
-        
-        mutateCSS: () => {
-            // Меняем цвета
-            document.documentElement.style.setProperty('--primary', '#ff0000');
-            document.body.style.filter = 'hue-rotate(90deg)';
-        },
-        
-        mutateText: () => {
-            // Меняем текст
-            const h1 = document.querySelector('h1, h2, h3, .title');
-            if (h1) h1.innerText = 'CHANGED: ' + h1.innerText.substring(0, 20);
-        },
-        
-        mutateSemantic: () => {
-            // Меняем классы
-            const badge = document.querySelector('.badge, .status, [class*="badge"]');
-            if (badge) {
-                badge.className = badge.className.replace('primary', 'secondary');
-                badge.className = badge.className.replace('success', 'danger');
-            }
-        },
-        
-        mutateContrast: () => {
-            // Снижаем контраст
-            document.body.style.filter = 'contrast(0.6) brightness(1.2)';
-        },
-        
-        mutateValidation: () => {
-            // Добавляем ошибки валидации
-            const input = document.querySelector('input');
-            if (input) {
-                input.style.borderColor = 'red';
-                const error = document.createElement('div');
-                error.className = 'validation-error';
-                error.innerText = 'Invalid input';
-                error.style.color = 'red';
-                error.style.fontSize = '12px';
-                input.parentNode.appendChild(error);
-            }
-        },
-        
-        mutateThemeVars: () => {
-            // Меняем CSS переменные
-            document.documentElement.style.setProperty('--bg-color', '#1a1a2e');
-            document.documentElement.style.setProperty('--text-color', '#eee');
-            document.body.style.backgroundColor = '#1a1a2e';
-            document.body.style.color = '#eee';
-        },
-        
-        mutateTooltips: () => {
-            // Меняем tooltips
-            const btn = document.querySelector('button, [title]');
-            if (btn) {
-                btn.setAttribute('title', 'CHANGED TOOLTIP');
-                btn.setAttribute('data-tooltip', 'Modified');
-            }
-        },
-        
-        mutateState: () => {
-            // Меняем состояние элементов
-            const btn = document.querySelector('button');
-            if (btn) {
-                btn.disabled = !btn.disabled;
-                btn.style.opacity = btn.disabled ? '0.5' : '1';
-            }
-        },
-        
-        mutateAnimation: () => {
-            // Отключаем анимации
-            const style = document.createElement('style');
-            style.innerText = '* { animation: none !important; transition: none !important; }';
-            document.head.appendChild(style);
-        },
-        
-        mutateOCR: () => {
-            // Меняем текст для OCR
-            const price = document.querySelector('[class*="price"], .cost, .amount');
-            if (price) price.innerText = '999999 ₽';
+    (function initAdminApp() {
+        // --- Тема ---
+        const themeBtn = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        if (themeBtn) {
+            themeBtn.addEventListener('click', () => {
+                const isDark = html.getAttribute('data-theme') === 'dark';
+                html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            });
         }
+
+        // --- Часы ---
+        const syncTimer = document.getElementById('sync-timer');
+        if (syncTimer) {
+            const updateClock = () => {
+                syncTimer.innerText = `Sync: ${new Date().toLocaleTimeString()}`;
+            };
+            updateClock(); // Вызываем немедленно, чтобы убрать заглушку "--:--:--"
+            setInterval(updateClock, 1000);
+        }
+
+        // --- Данные ---
+        let users = [
+            { id: 101, name: 'John Doe', role: 'Admin', status: 'active' },
+            { id: 102, name: 'Jane Smith', role: 'Editor', status: 'active' },
+            { id: 103, name: 'Robert Fox', role: 'Viewer', status: 'inactive' },
+            { id: 104, name: 'Emily Davis', role: 'Editor', status: 'blocked' }
+        ];
+
+        const tbody = document.getElementById('table-body');
+        const search = document.getElementById('search-input');
+        const countEl = document.getElementById('total-count');
+        const updatedEl = document.getElementById('last-updated');
+
+        function renderTable(filterText = '') {
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            
+            const filtered = users.filter(u => u.name.toLowerCase().includes(filterText.toLowerCase()));
+            
+            filtered.forEach(u => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>#${u.id}</td>
+                    <td style="font-weight: 500;">${u.name}</td>
+                    <td>${u.role}</td>
+                    <td><span class="status-badge status-${u.status}">${u.status}</span></td>
+                    <td class="action-cell">
+                        <button class="action-btn" title="Edit">✏️</button>
+                        <button class="action-btn" title="Delete" onclick="deleteUser(${u.id})">🗑️</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            
+            if (countEl) countEl.innerText = filtered.length;
+            if (updatedEl) updatedEl.innerText = new Date().toLocaleTimeString();
+        }
+
+        // Глобальная функция удаления для inline-кнопок
+        window.deleteUser = (id) => {
+            users = users.filter(u => u.id !== id);
+            renderTable(search ? search.value : '');
+        };
+
+        if (search) {
+            search.addEventListener('input', (e) => renderTable(e.target.value));
+        }
+
+        const addUserBtn = document.getElementById('add-user-btn');
+        if (addUserBtn) {
+            addUserBtn.addEventListener('click', () => {
+                const newId = users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 101;
+                users.unshift({ id: newId, name: `New User ${newId}`, role: 'Viewer', status: 'active' });
+                renderTable(search ? search.value : '');
+            });
+        }
+
+        // Первичный рендер
+        renderTable();
+    })();
+    </script>
+    
+    <script>
+    window.benchmark = {
+        mutateDOM: () => { const card = document.querySelector('.table-container'); if (card) { const w = document.createElement('div'); w.className = 'dom-mut'; card.parentNode.insertBefore(w, card); w.appendChild(card); } },
+        mutateCSS: () => { document.documentElement.style.setProperty('--primary', '#ff0000'); },
+        mutateText: () => { const h1 = document.querySelector('h1'); if(h1) h1.innerText = 'CHANGED'; },
+        mutateSemantic: () => { document.querySelectorAll('.status-active').forEach(e => e.className = 'status-badge status-blocked'); },
+        mutateContrast: () => { document.body.style.filter = 'contrast(0.6)'; },
+        mutateValidation: () => { document.getElementById('search-input').style.borderColor = 'red'; },
+        mutateThemeVars: () => { document.documentElement.setAttribute('data-theme', 'dark'); },
+        mutateState: () => { document.getElementById('add-user-btn').disabled = true; },
+        mutateAnimation: () => { const s = document.createElement('style'); s.innerText = '* { transition: none !important; }'; document.head.appendChild(s); },
+        mutateOCR: () => { document.getElementById('total-count').innerText = '9999'; }
     };
     </script>
 </body>

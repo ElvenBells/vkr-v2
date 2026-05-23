@@ -18,10 +18,11 @@ SITE_SOURCES = {
 
 # Функции инжекции дефектов (универсальные, работают с любым HTML)
 DEFECT_INJECTIONS = {
-    "missing_element": lambda html: html.replace('<button', '<!-- BUTTON REMOVED --><span')
-                                      .replace('<input', '<!-- INPUT REMOVED --><span'),
+    "missing_element": lambda html: html.replace('<button', '<span')
+                                      .replace('<input', '<span'),
+    # ИСПРАВЛЕНО: Убрано ошибочное дублирование "+ html" в первой ветке replace
     "wrong_color": lambda html: html.replace('</head>', 
-        '<style>.button,.btn,[class*="button"]{background:#ff0000 !important;color:#fff !important;}</style></head>' + html)
+        '<style>.button,.btn,[class*="button"]{background:#ff0000 !important;color:#fff !important;}</style></head>')
         if '</head>' in html else '<style>.button{background:#f00 !important;}</style>' + html,
     "broken_layout": lambda html: html.replace('<body>', '<body style="transform:rotate(1.5deg) scale(0.98);">'),
     "text_overflow": lambda html: html.replace('<h1>', '<h1 style="width:80px;overflow:hidden;white-space:nowrap;">')
@@ -31,7 +32,7 @@ DEFECT_INJECTIONS = {
     "wrong_text": lambda html: html.replace('Confirm', 'C0nfirm_#ERR')
                                   .replace('Submit', 'Subm1t_#ERR')
                                   .replace('Save', 'S@ve_#ERR'),
-    "missing_image": lambda html: html.replace('<img', '<!-- IMG REMOVED --><div')
+    "missing_image": lambda html: html.replace('<img', '<div')
                                      .replace('src=', 'data-src='),
     "broken_interaction": lambda html: html + '<script>document.querySelectorAll("button,input,select,textarea,a").forEach(el=>{if(el.tagName!=="A"||el.href!=="#"){el.disabled=true;el.style.pointerEvents="none";el.style.opacity="0.6";}});</script>'
 }

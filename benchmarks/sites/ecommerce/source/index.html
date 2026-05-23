@@ -19,22 +19,27 @@
     .cart-count { background: white; color: var(--primary); border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
     main { padding: 2rem; max-width: 1200px; margin: 0 auto; }
     .filters { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .filters select, .filters button { padding: 0.5rem 1rem; border: 1px solid #e5e7eb; border-radius: 0.375rem; background: white; }
+    
+    /* ИСПРАВЛЕНИЕ: Убрано .filters button, теперь стили применяются только к select */
+    .filters select { padding: 0.5rem 1rem; border: 1px solid #e5e7eb; border-radius: 0.375rem; background: white; }
+    
     .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
     .card { border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1rem; box-shadow: var(--card-shadow); transition: box-shadow 0.2s; }
     .card:hover { box-shadow: 0 4px 6px rgba(0,0,0,0.15); }
     .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 0.25rem; background: #f3f4f6; }
     .card-title { font-weight: 600; margin: 0.75rem 0 0.25rem; font-size: 1.1rem; }
     .card-price { color: var(--primary); font-weight: bold; font-size: 1.25rem; }
+    
+    /* Кнопка теперь корректно берет фон отсюда */
     .btn { background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.375rem; cursor: pointer; font-weight: 500; transition: background 0.2s; }
     .btn:hover { background: var(--primary-hover); }
     .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    
     .status-badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 500; }
     .status-badge.in-stock { background: #dcfce7; color: #166534; }
     .status-badge.out-of-stock { background: #fee2e2; color: #991b1b; }
     footer { text-align: center; padding: 2rem; color: #6b7280; font-size: 0.875rem; border-top: 1px solid #e5e7eb; margin-top: 3rem; }
     
-    /* Дефекты будут менять эти переменные или структуру */
     .mutate-css-target { color: var(--primary); }
     .mutate-theme-target { background: var(--bg); }
   </style>
@@ -49,23 +54,22 @@
   
   <main data-testid="main">
     <div class="filters" data-testid="filters">
-      <select data-testid="category-filter">
+      <select data-testid="category-filter" id="category-filter">
         <option>Все товары</option>
         <option>Электроника</option>
         <option>Одежда</option>
         <option>Для дома</option>
       </select>
-      <select data-testid="sort-filter">
+      <select data-testid="sort-filter" id="sort-filter">
         <option>По умолчанию</option>
         <option>Цена: по возрастанию</option>
         <option>Цена: по убыванию</option>
       </select>
-      <button class="btn" data-testid="apply-filters">Применить</button>
+      <button class="btn" data-testid="apply-filters" id="apply-filters">Применить</button>
     </div>
     
-    <div class="product-grid" data-testid="product-grid">
-      <!-- Карточка товара 1 -->
-      <article class="card product" data-testid="product-card" data-product-id="1">
+    <div class="product-grid" data-testid="product-grid" id="product-grid">
+      <article class="card product" data-testid="product-card" data-product-id="1" data-category="Электроника" data-price="4990">
         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='200' viewBox='0 0 250 200'%3E%3Crect fill='%23f3f4f6' width='250' height='200'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='sans-serif' font-size='14'%3EProduct Image%3C/text%3E%3C/svg%3E" alt="Товар 1" data-testid="product-image">
         <h3 class="card-title" data-testid="product-title">Беспроводные наушники</h3>
         <p class="card-price" data-testid="product-price">₽4,990</p>
@@ -73,19 +77,34 @@
         <button class="btn add-to-cart" data-testid="add-to-cart" data-product-id="1">В корзину</button>
       </article>
       
-      <!-- Карточка товара 2 -->
-      <article class="card product" data-testid="product-card" data-product-id="2">
+      <article class="card product" data-testid="product-card" data-product-id="2" data-category="Электроника" data-price="12490">
         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='200' viewBox='0 0 250 200'%3E%3Crect fill='%23f3f4f6' width='250' height='200'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='sans-serif' font-size='14'%3EProduct Image%3C/text%3E%3C/svg%3E" alt="Товар 2" data-testid="product-image">
         <h3 class="card-title" data-testid="product-title">Умные часы</h3>
         <p class="card-price" data-testid="product-price">₽12,490</p>
         <span class="status-badge in-stock" data-testid="product-status">В наличии</span>
         <button class="btn add-to-cart" data-testid="add-to-cart" data-product-id="2">В корзину</button>
       </article>
+
+      <article class="card product" data-testid="product-card" data-product-id="3" data-category="Одежда" data-price="3890">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='200' viewBox='0 0 250 200'%3E%3Crect fill='%23f3f4f6' width='250' height='200'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='sans-serif' font-size='14'%3EProduct Image%3C/text%3E%3C/svg%3E" alt="Товар 3" data-testid="product-image">
+        <h3 class="card-title" data-testid="product-title">Спортивное худи</h3>
+        <p class="card-price" data-testid="product-price">₽3,890</p>
+        <span class="status-badge in-stock" data-testid="product-status">В наличии</span>
+        <button class="btn add-to-cart" data-testid="add-to-cart" data-product-id="3">В корзину</button>
+      </article>
+
+      <article class="card product" data-testid="product-card" data-product-id="4" data-category="Для дома" data-price="2150">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='200' viewBox='0 0 250 200'%3E%3Crect fill='%23f3f4f6' width='250' height='200'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='sans-serif' font-size='14'%3EProduct Image%3C/text%3E%3C/svg%3E" alt="Товар 4" data-testid="product-image">
+        <h3 class="card-title" data-testid="product-title">Умная светодиодная лампа</h3>
+        <p class="card-price" data-testid="product-price">₽2,150</p>
+        <span class="status-badge out-of-stock" data-testid="product-status">Нет в наличии</span>
+        <button class="btn add-to-cart" data-testid="add-to-cart" data-product-id="4" disabled>В корзину</button>
+      </article>
     </div>
     
     <div class="stats" data-testid="page-stats">
-      Просмотров: <span data-testid="view-count">1240</span> | 
-      Обновлено: <span data-testid="last-update">--:--:--</span>
+      Просмотров: <span data-testid="view-count" id="view-count">1240</span> | 
+      Обновлено: <span data-testid="last-update" id="last-update">--:--:--</span>
     </div>
   </main>
   
@@ -93,16 +112,79 @@
     &copy; 2024 ShopBench Synthetic Benchmark
   </footer>
 
-  <!-- === СКРИПТ ИНЖЕКЦИИ ДЕФЕКТОВ === -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Инициализируем метку времени реальным значением
+      const timeStr = new Date().toTimeString().split(' ')[0];
+      document.getElementById('last-update').innerText = timeStr;
+
+      // Логика корзины
+      let cartCount = 0;
+      const cartCountEl = document.querySelector('[data-testid="cart-count"]');
+
+      document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', () => {
+          if (button.disabled) return;
+          cartCount++;
+          if (cartCountEl) cartCountEl.innerText = cartCount;
+          
+          const origText = button.innerText;
+          button.innerText = 'Добавлено ✓';
+          button.style.background = '#16a34a';
+          setTimeout(() => {
+            button.innerText = origText;
+            button.style.background = '';
+          }, 800);
+        });
+      });
+
+      // Логика фильтров и сортировки
+      const applyBtn = document.getElementById('apply-filters');
+      const catFilter = document.getElementById('category-filter');
+      const sortFilter = document.getElementById('sort-filter');
+      const grid = document.getElementById('product-grid');
+      const viewCountEl = document.getElementById('view-count');
+
+      if (applyBtn) {
+        applyBtn.addEventListener('click', () => {
+          // Имитируем активность (рост просмотров)
+          viewCountEl.innerText = parseInt(viewCountEl.innerText) + 1;
+
+          const selectedCat = catFilter.value;
+          const selectedSort = sortFilter.value;
+          let products = Array.from(document.querySelectorAll('[data-testid="product-card"]'));
+
+          // Фильтрация
+          products.forEach(card => {
+            const cat = card.getAttribute('data-category');
+            if (selectedCat === 'Все товары' || cat === selectedCat) {
+              card.style.display = '';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          // Сортировка
+          if (selectedSort !== 'По умолчанию') {
+            products.sort((a, b) => {
+              const priceA = parseInt(a.getAttribute('data-price'));
+              const priceB = parseInt(b.getAttribute('data-price'));
+              return selectedSort === 'Цена: по возрастанию' ? priceA - priceB : priceB - priceA;
+            });
+            products.forEach(card => grid.appendChild(card));
+          }
+        });
+      }
+    });
+  </script>
+
   <script>
   window.benchmark = {
     mutateDOM: () => {
-      // Удаляем data-testid у карточек — ломает локаторы [data-testid="product-card"]
       document.querySelectorAll('[data-testid="product-card"]').forEach(el => {
         el.removeAttribute('data-testid');
         el.classList.add('dom-mutated');
       });
-      // Меняем структуру: оборачиваем заголовок в лишний div
       document.querySelectorAll('.card-title').forEach(el => {
         const wrapper = document.createElement('div');
         wrapper.className = 'title-wrapper';
@@ -110,9 +192,7 @@
         wrapper.appendChild(el);
       });
     },
-    
     mutateCSS: () => {
-      // Меняем цвет кнопок и карточек
       document.documentElement.style.setProperty('--primary', '#dc2626');
       document.documentElement.style.setProperty('--primary-hover', '#b91c1c');
       document.querySelectorAll('.card').forEach(el => {
@@ -120,9 +200,7 @@
         el.style.boxShadow = '0 0 0 2px #fecaca';
       });
     },
-    
     mutateText: () => {
-      // Меняем текст в ключевых элементах
       const titles = document.querySelectorAll('[data-testid="product-title"]');
       titles.forEach((el, i) => { el.innerText = `🔥 ${el.innerText} (SALE)`; });
       const prices = document.querySelectorAll('[data-testid="product-price"]');
@@ -131,9 +209,7 @@
         el.innerText = `₽${Math.floor(val * 0.7).toLocaleString('ru-RU')}`;
       });
     },
-    
     mutateSemantic: () => {
-      // Меняем семантику: article → div, button → span
       document.querySelectorAll('article.product').forEach(el => {
         el.outerHTML = el.outerHTML.replace('<article', '<div').replace('</article>', '</div>');
       });
@@ -142,17 +218,13 @@
         el.style.cursor = 'default';
       });
     },
-    
     mutateContrast: () => {
-      // Снижаем контрастность текста
       document.body.style.filter = 'contrast(0.7) brightness(1.1)';
       document.querySelectorAll('.card-price, .card-title').forEach(el => {
         el.style.color = '#9ca3af';
       });
     },
-    
     mutateValidation: () => {
-      // Добавляем визуальные ошибки валидации
       document.querySelectorAll('.add-to-cart').forEach(btn => {
         btn.disabled = true;
         btn.title = 'Требуется авторизация';
@@ -165,9 +237,7 @@
         btn.parentNode.appendChild(badge);
       });
     },
-    
     mutateThemeVars: () => {
-      // Меняем тему на "тёмную"
       document.documentElement.style.setProperty('--primary', '#60a5fa');
       document.documentElement.style.setProperty('--text', '#f3f4f6');
       document.documentElement.style.setProperty('--bg', '#111827');
@@ -178,49 +248,29 @@
         el.style.borderColor = '#374151';
       });
     },
-    
     mutateTooltips: () => {
-      // Добавляем/меняем tooltips
       document.querySelectorAll('[data-testid="add-to-cart"]').forEach(btn => {
         btn.setAttribute('title', '🎁 Акция: скидка 10% при покупке от 2 товаров!');
         btn.setAttribute('data-tooltip', 'promo-active');
       });
     },
-    
     mutateState: () => {
-      // Меняем состояние элементов
       document.querySelectorAll('.add-to-cart').forEach((btn, i) => {
         if (i % 2 === 0) {
           btn.disabled = true;
           btn.innerText = 'Нет в наличии';
-          btn.classList.remove('btn-primary');
           btn.style.background = '#9ca3af';
         }
       });
-      document.querySelectorAll('.status-badge.in-stock').forEach((badge, i) => {
-        if (i % 2 === 0) {
-          badge.className = 'status-badge out-of-stock';
-          badge.innerText = 'Нет в наличии';
-        }
-      });
     },
-    
     mutateAnimation: () => {
-      // Отключаем анимации и добавляем "мигание"
       const style = document.createElement('style');
-      style.innerText = `
-        * { animation: none !important; transition: none !important; }
-        .card { animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
-      `;
+      style.innerText = `* { animation: none !important; transition: none !important; } .card { animation: pulse 2s infinite; } @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }`;
       document.head.appendChild(style);
     },
-    
     mutateOCR: () => {
-      // Меняем текст так, чтобы OCR мог ошибиться (похожие символы)
       document.querySelectorAll('[data-testid="product-price"]').forEach(el => {
         const text = el.innerText;
-        // Заменяем ₽ на похожий символ, цифры на буквы
         el.innerText = text.replace('₽', '₱').replace(/\d/g, d => String.fromCharCode(d.charCodeAt(0) + 1));
       });
     }
