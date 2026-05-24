@@ -41,7 +41,17 @@ class DynamicExperimentOrchestrator:
             page = browser.new_page(viewport={"width": 1920, "height": 1080})
             
             logger.info(f"🌐 Агент переходит на: {test_url}")
-            page.goto(test_url)
+            
+            # БЛОК ЭКСТРЕМАЛЬНОГО ТЕСТИРОВАНИЯ: Проверка валидности URL
+            try:
+                response = page.goto(test_url, wait_until="domcontentloaded", timeout=30000)
+                # Если ответ пустой или статус >= 400 (например, 404 Not Found)
+                if not response or not response.ok:
+                    status_code = response.status if response else "Unknown"
+                    raise ValueError(f"Сайт вернул ошибку {status_code}. Невозможно продолжить тестирование.")
+            except Exception as e:
+                logger.error(f"Ошибка навигации Playwright: {e}")
+                raise ValueError(f"Целевой URL недоступен. Детали: {str(e)}")
             
             # 1. ЗАПУСК АГЕНТА (Сценарная часть)
             agent = AutoTesterAgent(page=page, model_path=self.cfg["paths"].get("yolo_model", "models/best.pt"))

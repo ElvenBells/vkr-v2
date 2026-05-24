@@ -552,9 +552,22 @@ function App() {
 
                   {baselineType === 'file' ? (
                     <label
-                      onDragEnter={() => setIsDragging(true)}
-                      onDragLeave={() => setIsDragging(false)}
-                      onDrop={() => setIsDragging(false)}
+                      onDragEnter={(e) => { e.preventDefault(); setIsDragging(true); }}
+                      onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+                      onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
+                      onDrop={(e) => {
+                        e.preventDefault();
+                        setIsDragging(false);
+                        const file = e.dataTransfer.files?.[0];
+                        if (file) {
+                          const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'];
+                          if (!validTypes.includes(file.type)) {
+                            alert('❌ Ошибка: Допускаются только изображения в форматах PNG, JPG или WebP.');
+                            return;
+                          }
+                          setBaselineFile(file);
+                        }
+                      }}
                       className={cn(
                         'mt-5 flex min-h-44 cursor-pointer flex-col items-center justify-center rounded-3xl border-2 border-dashed bg-white px-6 py-8 text-center transition',
                         isDragging ? 'border-blue-500 bg-blue-50/80' : 'border-blue-200 hover:bg-blue-50/50'
@@ -578,8 +591,21 @@ function App() {
 
                       <input
                         type="file"
-                        accept="image/*"
-                        onChange={(e) => setBaselineFile(e.target.files?.[0] || null)}
+                        accept=".png, .jpg, .jpeg, .webp"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'];
+                            if (!validTypes.includes(file.type)) {
+                              alert('❌ Ошибка: Пожалуйста, загрузите изображение (PNG, JPG, WebP).');
+                              e.target.value = ''; // Сбрасываем некорректный файл
+                              return;
+                            }
+                            setBaselineFile(file);
+                          } else {
+                            setBaselineFile(null);
+                          }
+                        }}
                         className="hidden"
                       />
                     </label>

@@ -47,9 +47,16 @@ def capture_baseline(url: str, path: str):
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page(viewport={"width": 1920, "height": 1080})
-        page.goto(url)
-        page.screenshot(path=path)
-        browser.close()
+        try:
+            response = page.goto(url, wait_until="domcontentloaded", timeout=30000)
+            if not response or not response.ok:
+                status = response.status if response else "Unknown"
+                raise ValueError(f"Эталонный URL недоступен. Код ответа: {status}")
+            page.screenshot(path=path)
+        except Exception as e:
+            raise ValueError(f"Ошибка загрузки эталонного URL: {str(e)}")
+        finally:
+            browser.close()
 
 def generate_llm_report(result: dict) -> str:
     """Анализирует сырые метрики и пишет человекочитаемый отчет (Интерпретатор)."""
@@ -105,9 +112,47 @@ def background_test_execution(task_id: str, test_url: str, goal: str, ref_path: 
         TASKS[task_id]["result"] = result
         
     except Exception as e:
-        logger.exception(f"[Task {task_id}] Ошибка:")
+        logger.exception(f"[Task {task_id}] Критический сбой выполнения:")
         TASKS[task_id]["status"] = "failed"
-        TASKS[task_id]["error"] = str(e)
+        
+        # Преобразуем ошибку в строку для семантического анализа текста
+        err_msg = str(e)
+        
+        # 1. Отлавливаем ошибку авторизации API-ключей (Groq / OpenAI / 401)
+        if "401" in err_msg or "invalid_api_key" in err_msg or "Invalid API Key" in err_msg:
+            readable_error = (
+                "Ошибка авторизации внешнего сервиса: Указан недействительный, "
+                "неактивный или пустой API-ключ ИИ-провайдера (Invalid API Key) "
+                "в файле конфигурации среды .env."
+            )
+        
+        # 2. Отлавливаем ошибку несуществующего или недоступного URL (ERR_NAME_NOT_RESOLVED)
+        elif "ERR_NAME_NOT_RESOLVED" in err_msg or "invalid/url" in err_msg or "net::ERR" in err_msg:
+            readable_error = (
+                "Ошибка сетевой навигации: Указанный целевой URL-адрес не существует в сети, "
+                "введен некорректно или удаленный веб-сервер не отвечает (DNS Error / Unreachable)."
+            )
+        
+        # 3. Отлавливаем сбой сети / таймаут соединения с LLM-провайдером
+        elif "ConnectTimeout" in err_msg or "Connection error" in err_msg or "api.groq.com" in err_msg:
+            readable_error = (
+                "Сбой сетевого соединения: Внешний шлюз ИИ-провайдера (API Gateway) "
+                "не ответил за установленный интервал времени. Проверьте подключение к Интернету."
+            )
+            
+        # 4. Отлавливаем отсутствие физического файла весов YOLO (best.pt)
+        elif "FileNotFoundError" in err_msg or "best.pt" in err_msg or "not found" in err_msg.lower():
+            readable_error = (
+                "Ошибка инициализации модуля компьютерного зрения (CV): Файл предобученных весов "
+                "нейросети (best.pt) не обнаружен в целевой директории models/. "
+                "Проверьте наличие артефактов модели."
+            )
+            
+        # Для всех остальных непредвиденных исключений
+        else:
+            readable_error = f"Системное исключение при выполнении конвейера тестов: {err_msg}"
+            
+        TASKS[task_id]["error"] = readable_error
 
 @app.post("/api/run-test")
 def start_qa_test(  # <-- УБРАЛИ СЛОВО async
@@ -123,10 +168,19 @@ def start_qa_test(  # <-- УБРАЛИ СЛОВО async
     
     # Обрабатываем эталон в зависимости от выбора пользователя
     if baseline_type == 'file' and ref_screenshot:
+        # Проверка расширения файла (Защита от экстремальных вводов)
+        ext = ref_screenshot.filename.split('.')[-1].lower()
+        if ext not in ['png', 'jpg', 'jpeg', 'webp']:
+            return {"error": f"Формат '{ext}' не поддерживается. Разрешены только PNG, JPG, WebP."}
+            
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(ref_screenshot.file, buffer)
+            
     elif baseline_type == 'url' and ref_url:
-        capture_baseline(ref_url, file_path) # Теперь Playwright безопасно отработает в отдельном потоке!
+        try:
+            capture_baseline(ref_url, file_path) # Playwright безопасно отработает
+        except ValueError as e:
+            return {"error": str(e)} # Если URL битый, вернем ошибку на фронт сразу
     else:
         return {"error": "Не предоставлен эталон"}
 
